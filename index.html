@@ -1,0 +1,5227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>尼康 Nikon Z30 双镜头摄影实战典藏馆（8 卷典藏 · 54 讲全集）</title>
+  <style>
+    :root {
+      --bg-canvas: #090a0f;
+      --bg-surface: #11131c;
+      --bg-card: #181b26;
+      --bg-card-hover: #1f2333;
+      --bg-sheet: #141722;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(255, 209, 0, 0.5);
+      --nikon-gold: #ffd100;
+      --nikon-amber: #f59e0b;
+      --nikon-glow: rgba(255, 209, 0, 0.18);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --book-radius: 12px;
+      --shadow-book: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      --shadow-hover: 0 24px 48px -10px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 209, 0, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── Global Topbar ─── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17, 19, 28, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .brand-emblem {
+      background: var(--nikon-gold);
+      color: #000;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .topbar-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-badge {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 2px 7px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .topbar-center {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 8px 36px 8px 38px;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--nikon-gold);
+      box-shadow: 0 0 16px var(--nikon-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .topbar-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .topbar-btn:hover, .topbar-btn.active {
+      background: rgba(255, 209, 0, 0.12);
+      border-color: var(--nikon-gold);
+      color: var(--nikon-gold);
+    }
+
+    .btn-text-full { display: inline; }
+    .btn-text-mobile { display: none; }
+
+    /* ─── Mode Container ─── */
+    .view-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px;
+      transition: padding 0.2s ease;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       1. BOOKSHELF VIEW (典藏书架总览)
+       ══════════════════════════════════════════════════════════════ */
+    #bookshelfView {
+      display: block;
+    }
+
+    .shelf-hero {
+      background: radial-gradient(circle at 80% 20%, rgba(255, 209, 0, 0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, rgba(25, 28, 40, 0.6) 0%, rgba(17, 19, 28, 0.3) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-meta h1 {
+      font-size: 25px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .hero-meta h1 span {
+      color: var(--nikon-gold);
+    }
+
+    .hero-meta p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .stat-pill {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 18px;
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--nikon-gold);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .pill-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .pill-btn.active {
+      background: var(--nikon-gold);
+      color: #000;
+      font-weight: 700;
+      border-color: var(--nikon-gold);
+    }
+
+    .last-read-card {
+      background: rgba(255, 209, 0, 0.06);
+      border: 1px solid rgba(255, 209, 0, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--nikon-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .last-read-card:hover {
+      background: rgba(255, 209, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    /* ─── 3D Bookshelf Grid ─── */
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bookshelf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: 20px;
+      margin-bottom: 38px;
+    }
+
+    /* Book Volume Card */
+    .book-volume-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--book-radius);
+      padding: 22px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      box-shadow: var(--shadow-book);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .book-volume-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--vol-accent, var(--nikon-gold));
+      box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
+
+    .book-volume-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 6px;
+      width: 12px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .book-volume-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--vol-accent, var(--nikon-gold));
+      box-shadow: var(--shadow-hover);
+    }
+
+    .bvc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      padding-left: 10px;
+    }
+
+    .bvc-vol-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--vol-accent, var(--nikon-gold));
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .bvc-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .bvc-body {
+      padding-left: 10px;
+      flex: 1;
+    }
+
+    .bvc-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bvc-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .bvc-footer {
+      padding-left: 10px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 12px;
+    }
+
+    .bvc-progress {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .bvc-open-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .book-volume-card:hover .bvc-open-btn {
+      background: var(--vol-accent, var(--nikon-gold));
+      color: #000;
+      border-color: var(--vol-accent, var(--nikon-gold));
+      font-weight: 700;
+    }
+
+    /* ─── Fast Index Grid ─── */
+    .quick-index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 16px;
+    }
+
+    .tip-index-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tip-index-card:hover {
+      border-color: rgba(255, 209, 0, 0.4);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .tic-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .tic-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #000;
+      background: var(--nikon-gold);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .tic-tags {
+      display: flex;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .tag-bubble {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .tic-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .tic-summary {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       2. READING ROOM VIEW (沉浸式精装书房阅读器)
+       ══════════════════════════════════════════════════════════════ */
+    #readerView {
+      display: none;
+    }
+
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Left Sidebar: TOC */
+    .reader-toc-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      position: sticky;
+      top: 76px;
+      max-height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .toc-header {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .toc-mobile-toggle-btn {
+      display: none;
+      width: 100%;
+      background: rgba(255, 209, 0, 0.1);
+      border: 1px solid rgba(255, 209, 0, 0.3);
+      color: var(--nikon-gold);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 8px;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .toc-vol-selector {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .toc-vol-selector option {
+      background: var(--bg-surface);
+      color: #fff;
+    }
+
+    .toc-vol-info {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px;
+    }
+
+    .toc-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+    }
+
+    .toc-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .toc-item.active {
+      background: rgba(255, 209, 0, 0.1);
+      border-color: rgba(255, 209, 0, 0.4);
+      color: var(--nikon-gold);
+    }
+
+    .toc-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-dim);
+      min-width: 24px;
+    }
+
+    .toc-item.active .toc-num {
+      color: var(--nikon-gold);
+    }
+
+    .toc-text {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .toc-lens-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .toc-lens-dot.wide { background: #34d399; }
+    .toc-lens-dot.tele { background: #fb923c; }
+    .toc-lens-dot.both { background: #38bdf8; }
+
+    /* Right Main Book Sheet */
+    .reader-sheet-panel {
+      background: var(--bg-sheet);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      padding: 38px 44px;
+      min-height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    /* Sheet Header */
+    .sheet-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .sm-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sheet-id-badge {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 900;
+      background: var(--nikon-gold);
+      color: #000;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .sheet-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .sheet-pill.pill-lens {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .sheet-pill.pill-mount {
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.3);
+      background: rgba(52, 211, 153, 0.08);
+    }
+
+    .sm-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-action:hover, .btn-action.active {
+      background: rgba(255, 209, 0, 0.12);
+      border-color: var(--nikon-gold);
+      color: var(--nikon-gold);
+    }
+
+    /* Sheet Typography */
+    .sheet-title {
+      font-size: 23px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .sheet-abstract {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid var(--nikon-gold);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #e2e8f0;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    /* Step Section */
+    .block-section {
+      margin-bottom: 30px;
+    }
+
+    .block-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--nikon-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .step-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .step-card code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: rgba(255, 209, 0, 0.12);
+      color: var(--nikon-gold);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 209, 0, 0.25);
+    }
+
+    /* Parameter Table */
+    .param-box {
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.3);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .param-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+    }
+
+    .param-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .param-key {
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .param-val {
+      font-family: var(--font-mono);
+      color: var(--nikon-gold);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Pitfall Warning */
+    .pitfall-callout {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, rgba(0, 0, 0, 0.2) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-left: 4px solid #ef4444;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .pitfall-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pitfall-content-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #f87171;
+      margin-bottom: 4px;
+    }
+
+    .pitfall-content-text {
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    /* Sheet Footer: Page Turners */
+    .sheet-pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 22px;
+      margin-top: 36px;
+      gap: 12px;
+    }
+
+    .pager-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .pager-btn:hover:not(:disabled) {
+      background: var(--nikon-gold);
+      color: #000;
+      border-color: var(--nikon-gold);
+    }
+
+    .pager-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .pager-progress {
+      text-align: center;
+      flex: 1;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .progress-bar-wrap {
+      width: 130px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--nikon-gold);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e2230;
+      border: 1px solid var(--nikon-gold);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       📱 MOBILE PHONE RESPONSIVE STYLES (< 768px)
+       ══════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .topbar-left {
+        gap: 8px;
+      }
+
+      .topbar-title {
+        font-size: 15px;
+      }
+
+      .topbar-badge {
+        display: none;
+      }
+
+      .topbar-center {
+        order: 3;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .search-input {
+        padding: 7px 32px 7px 34px;
+        font-size: 12.5px;
+      }
+
+      .topbar-right {
+        gap: 6px;
+      }
+
+      .topbar-btn {
+        padding: 6px 10px;
+        font-size: 11.5px;
+      }
+
+      .btn-text-full { display: none; }
+      .btn-text-mobile { display: inline; }
+
+      .view-container {
+        padding: 14px 12px 85px; /* Extra bottom padding for thumb bar */
+      }
+
+      /* Hero on phone */
+      .shelf-hero {
+        padding: 20px 18px;
+        margin-bottom: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .hero-meta h1 {
+        font-size: 20px;
+        line-height: 1.35;
+      }
+
+      .hero-meta p {
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .hero-stats {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat-pill {
+        padding: 10px 12px;
+        min-width: 0;
+      }
+
+      .stat-num {
+        font-size: 20px;
+      }
+
+      /* Filter Pills on phone (Horizontal touch swipe) */
+      .filter-bar {
+        margin-bottom: 16px;
+        gap: 10px;
+      }
+
+      .filter-pills {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+      }
+
+      .filter-pills::-webkit-scrollbar {
+        display: none;
+      }
+
+      .pill-btn {
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .last-read-card {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      /* Grids on phone */
+      .bookshelf-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .book-volume-card {
+        min-height: 200px;
+        padding: 18px;
+      }
+
+      .quick-index-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      /* Reader View on Phone */
+      .reader-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .reader-toc-panel {
+        position: static;
+        max-height: none;
+        border-radius: 12px;
+      }
+
+      .toc-header {
+        padding: 14px;
+      }
+
+      /* On mobile, TOC starts collapsible */
+      .toc-mobile-toggle-btn {
+        display: flex;
+      }
+
+      .toc-list {
+        display: none; /* Collapsed by default on phone */
+        max-height: 260px;
+      }
+
+      .toc-list.mobile-expanded {
+        display: block;
+      }
+
+      .reader-sheet-panel {
+        padding: 20px 14px;
+        border-radius: 12px;
+        min-height: auto;
+      }
+
+      .sheet-meta-bar {
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        gap: 10px;
+      }
+
+      .sheet-title {
+        font-size: 19px;
+        line-height: 1.4;
+        margin-bottom: 14px;
+      }
+
+      .sheet-abstract {
+        padding: 14px 16px;
+        font-size: 13px;
+        margin-bottom: 22px;
+      }
+
+      .block-section {
+        margin-bottom: 24px;
+      }
+
+      .step-card {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .param-table {
+        font-size: 12px;
+      }
+
+      .param-table th, .param-table td {
+        padding: 8px 10px;
+      }
+
+      .pitfall-callout {
+        padding: 12px 14px;
+        margin-top: 18px;
+      }
+
+      /* Sticky Bottom Pager on Mobile */
+      .sheet-pager {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 95;
+        background: rgba(17, 19, 28, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-subtle);
+        padding: 10px 16px max(10px, env(safe-area-inset-bottom));
+        margin-top: 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .pager-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+
+      .progress-bar-wrap {
+        width: 90px;
+      }
+
+      .toast {
+        bottom: 76px;
+        right: 16px;
+        left: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-left" onclick="showBookshelfView()">
+      <div class="brand-emblem">NIKON Z30</div>
+      <div class="topbar-title">
+        <span>摄影典藏馆</span>
+        <span class="topbar-badge">8 卷 · 54 讲</span>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="globalSearch" class="search-input" placeholder="全局搜索技巧、焦段、快门参数...">
+        <button id="clearSearchBtn" class="search-clear" onclick="clearSearch()">✕</button>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button class="topbar-btn" id="btnBookmarkShelf" onclick="filterByBookmarks()">
+        <span>⭐</span>
+        <span class="btn-text-full">我的书签 (<span id="bookmarkCount">0</span>)</span>
+        <span class="btn-text-mobile"><span id="bookmarkCountMobile">0</span></span>
+      </button>
+      <button class="topbar-btn" id="btnToggleView" onclick="toggleShelfOrReader()">
+        <span>📖</span>
+        <span id="btnToggleViewText">
+          <span class="btn-text-full">进入书房阅读器</span>
+          <span class="btn-text-mobile">阅读器</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main class="view-container">
+
+    <!-- ══════════════════════════════════════════════════════════════
+         VIEW 1: BOOKSHELF OVERVIEW (典藏书架)
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="bookshelfView">
+      <!-- Hero Banner -->
+      <div class="shelf-hero">
+        <div class="hero-meta">
+          <h1>尼康 Nikon Z30 <span>双镜头实战宝典</span></h1>
+          <p>
+            专为 <strong>16-50mm</strong> 与 <strong>50-250mm</strong> 双镜头量身打造的数字化互动典藏馆。
+            已重构为 <strong>8 卷实战分册</strong>，支持手机滑动翻阅、参数速查与书签收藏。
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <div class="stat-num">8</div>
+            <div class="stat-label">典藏分卷</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-num" id="heroTotalCount">54</div>
+            <div class="stat-label">实战讲数</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="filter-bar">
+        <div class="filter-pills">
+          <button class="pill-btn active" data-filter="all" onclick="setLensFilter('all', this)">全部讲次</button>
+          <button class="pill-btn" data-filter="wide" onclick="setLensFilter('wide', this)">16-50mm 广角套头</button>
+          <button class="pill-btn" data-filter="tele" onclick="setLensFilter('tele', this)">50-250mm 长焦镜头</button>
+          <button class="pill-btn" data-filter="both" onclick="setLensFilter('both', this)">双镜协同 / 操控</button>
+        </div>
+        <div id="lastReadContainer" style="display: none; width: 100%;">
+          <div class="last-read-card" onclick="resumeLastRead()">
+            <span>📌 继续阅读：</span>
+            <span id="lastReadTitle">#01 深度定制 i 菜单</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- The 8 Books Volumes Grid -->
+      <div class="section-title-row">
+        <div class="section-title">
+          <span>📚</span>
+          <span>八大实战典藏分卷</span>
+        </div>
+      </div>
+      <div class="bookshelf-grid" id="volumeCardsGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Quick Search & Cards Index -->
+      <div class="section-title-row" style="margin-top: 32px;">
+        <div class="section-title">
+          <span>📑</span>
+          <span id="cardsIndexTitle">全部 54 讲目录速查索引</span>
+        </div>
+        <span class="topbar-badge" id="visibleCardsCount">共 54 讲</span>
+      </div>
+      <div class="quick-index-grid" id="quickIndexGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         VIEW 2: READING ROOM (精装书房阅读器)
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="readerView">
+      <div class="reader-layout">
+        <!-- Left Sidebar / Mobile Collapsible: TOC -->
+        <aside class="reader-toc-panel">
+          <div class="toc-header">
+            <button class="toc-mobile-toggle-btn" id="btnToggleMobileToc" onclick="toggleMobileToc()">
+              <span>📑 本卷目录速查 (<span id="mobileTocCount">5讲</span>)</span>
+              <span id="mobileTocArrow">▼</span>
+            </button>
+            <select id="tocVolSelector" class="toc-vol-selector" onchange="onSelectVolFromDropdown(this.value)">
+              <!-- Options populated by JS -->
+            </select>
+            <div class="toc-vol-info">
+              <span id="tocVolProgress">本卷共 5 讲</span>
+              <span style="cursor: pointer; color: var(--nikon-gold); font-weight: 700;" onclick="showBookshelfView()">← 返回书架</span>
+            </div>
+          </div>
+          <ul class="toc-list" id="tocItemsList">
+            <!-- Items populated by JS -->
+          </ul>
+        </aside>
+
+        <!-- Right Main: Reading Sheet (Supports Touch Swiping) -->
+        <article class="reader-sheet-panel" id="readerSheetPanel">
+          <div>
+            <!-- Sheet Meta Bar -->
+            <div class="sheet-meta-bar">
+              <div class="sm-left">
+                <span class="sheet-id-badge" id="sheetId">#01</span>
+                <span class="sheet-pill" id="sheetCategory">基础操控卷</span>
+                <span class="sheet-pill pill-lens" id="sheetLens">16-50mm / 50-250mm</span>
+                <span class="sheet-pill pill-mount" id="sheetMount">手持 / 三脚架</span>
+              </div>
+              <div class="sm-actions">
+                <button class="btn-action" id="btnToggleBookmark" onclick="toggleCurrentBookmark()">
+                  <span id="bookmarkStarIcon">☆</span>
+                  <span id="bookmarkText">加入书签</span>
+                </button>
+                <button class="btn-action" onclick="copyCurrentParams()">
+                  <span>📋</span>
+                  <span>复制参数</span>
+                </button>
+                <button class="btn-action" onclick="showBookshelfView()">
+                  <span>✕ 返回</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Title & Summary -->
+            <h2 class="sheet-title" id="sheetTitle">标题加载中...</h2>
+            <div class="sheet-abstract" id="sheetSummary">
+              概要加载中...
+            </div>
+
+            <!-- Steps Block -->
+            <div class="block-section">
+              <div class="block-title">
+                <span>🛠️</span>
+                <span>实战操作流程与菜单路径</span>
+              </div>
+              <div class="step-flow" id="sheetSteps">
+                <!-- Steps rendered by JS -->
+              </div>
+            </div>
+
+            <!-- Parameters Block -->
+            <div class="block-section">
+              <div class="block-title">
+                <span>📊</span>
+                <span>核心实拍参数配方卡</span>
+              </div>
+              <div class="param-box">
+                <table class="param-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">参数项目</th>
+                      <th style="width: 35%;">推荐设定值</th>
+                      <th>实战原理与设定理由</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sheetParamsTable">
+                    <!-- Params rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Pitfall Warning -->
+            <div class="pitfall-callout" id="sheetPitfallBox">
+              <div class="pitfall-icon">💡</div>
+              <div>
+                <div class="pitfall-content-title">摄影师避坑要诀与大师级进阶</div>
+                <div class="pitfall-content-text" id="sheetPitfallText">
+                  避坑指南内容
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Pager (Floating sticky bar on mobile) -->
+          <footer class="sheet-pager">
+            <button class="pager-btn" id="btnPrevTip" onclick="goPrevTip()">
+              <span>◀</span>
+              <span>上一讲</span>
+            </button>
+            <div class="pager-progress">
+              <div class="progress-text" id="pagerProgressText">第 1 / 54 讲</div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+              </div>
+            </div>
+            <button class="pager-btn" id="btnNextTip" onclick="goNextTip()">
+              <span>下一讲</span>
+              <span>▶</span>
+            </button>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="globalToast">已复制核心实拍参数到剪贴板！</div>
+
+  <!-- Embedded Knowledge Base JSON -->
+  <script>
+    const DATA = {
+  "chapters": {
+    "controls": {
+      "id": "controls",
+      "vol": "Vol.01",
+      "name": "基础操控与核心设置卷",
+      "icon": "⚙️",
+      "color": "#38bdf8",
+      "gradient": "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
+      "desc": "Z30 专属单手操控流、i 菜单深度配置、脚架 d3 防震锁、U1/U2 模式固化、低光度 AF 与 3D 追踪对焦。"
+    },
+    "landscape": {
+      "id": "landscape",
+      "vol": "Vol.02",
+      "name": "16-50mm 广角大场景风光卷",
+      "icon": "🏔️",
+      "color": "#34d399",
+      "gradient": "linear-gradient(135deg, #059669 0%, #047857 100%)",
+      "desc": "1.6m 超焦距贴地大前景、BKT 包围曝光攻克大光比、6000万像素全景接片、全景深焦距变化拍摄与太阳 14 芒星芒。"
+    },
+    "telephoto": {
+      "id": "telephoto",
+      "vol": "Vol.03",
+      "name": "50-250mm 长焦空间压缩卷",
+      "icon": "🔭",
+      "color": "#fb923c",
+      "gradient": "linear-gradient(135deg, #ea580c 0%, #c2410c 100%)",
+      "desc": "透视扁平化叠压、建筑极简几何硬影切割、远山晨雾水墨意境、画中画远距框架构图与丁达尔神光压缩。"
+    },
+    "nightscape": {
+      "id": "nightscape",
+      "vol": "Vol.04",
+      "name": "城市夜景与慢门流光卷",
+      "icon": "🌃",
+      "color": "#818cf8",
+      "gradient": "linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)",
+      "desc": "蓝调时刻冷暖调校、立交桥车轨与 f/11 星芒、多层立体光之过山车、斜拉桥钢索夜景、隔窗消反光长曝与变焦拉焦特技。"
+    },
+    "astronomy": {
+      "id": "astronomy",
+      "vol": "Vol.05",
+      "name": "日月天象与深空星空卷",
+      "icon": "✨",
+      "color": "#e879f9",
+      "gradient": "linear-gradient(135deg, #9333ea 0%, #6b21a8 100%)",
+      "desc": "月面环形山与悬日特写、间隔定时星轨录制、银河核心堆栈降噪、雷暴闪电捕获与机内多重曝光变亮合成。"
+    },
+    "portrait": {
+      "id": "portrait",
+      "vol": "Vol.06",
+      "name": "人像与人文扫街纪实卷",
+      "icon": "👥",
+      "color": "#f43f5e",
+      "gradient": "linear-gradient(135deg, #e11d48 0%, #9f1239 100%)",
+      "desc": "眼部侦测人像特写、50mm 黄金扫街视角、慢速同步闪光灯、下雨天倒影人文与黑白街头纪实调校。"
+    },
+    "macro": {
+      "id": "macro",
+      "vol": "Vol.07",
+      "name": "微距特写与创意消除卷",
+      "icon": "🔬",
+      "color": "#a3e635",
+      "gradient": "linear-gradient(135deg, #65a30d 0%, #4d7c0f 100%)",
+      "desc": "50-250mm 1米近摄虚化特写、动态消人术连拍堆栈、雨后水滴倒影微距与光影质感提炼。"
+    },
+    "color": {
+      "id": "color",
+      "vol": "Vol.08",
+      "name": "创意外观与色彩流派卷",
+      "icon": "🎨",
+      "color": "#facc15",
+      "gradient": "linear-gradient(135deg, #ca8a04 0%, #a16207 100%)",
+      "desc": "柯达金调胶片直出、富士 NC 胶片模拟风格、日系清透蓝调微调、深色电影调校与自定义色温微调。"
+    }
+  },
+  "tips": [
+    {
+      "id": 1,
+      "idStr": "01",
+      "chap": "controls",
+      "category": "基础操控",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "手持 / 三脚架",
+      "title": "深度定制「i 菜单」与快捷按键，打造专属单手操控流",
+      "summary": "针对 Z30 取消取景器、依赖翻转屏操作的特性，将常用参数深度固化到 i 菜单与 Fn 实体键，实现无需翻找二级菜单的盲操闭环。",
+      "steps": [
+        {
+          "strong": "自定义 i 菜单",
+          "text": "进入 <code>MENU</code> ➜ <code>自定义设定菜单</code> ➜ <code>f 控制</code> ➜ <code>f1 自定义 i 菜单</code>。将测光模式、AF 区域模式、对焦主体检测、优化校准、减震 VR 和快门类型放置在右侧触手可及区域。"
+        },
+        {
+          "strong": "自定义 Fn1 键",
+          "text": "进入 <code>f2 自定义控制（拍摄）</code>，将卡口旁的 Fn1 键设为【对焦区域模式 + AF-ON】或【测光】。"
+        },
+        {
+          "strong": "自定义 Fn2 键",
+          "text": "推荐设为【放大（开启/关闭 100% 局部对焦）】，在手动对焦或检查微距、星空焦点时一键秒级调出。"
+        }
+      ],
+      "params": [
+        {
+          "key": "i 菜单布局",
+          "val": "测光、AF模式、主体识别、VR开关、Picture Control",
+          "desc": "右侧触控一触即达，无需进复杂菜单"
+        },
+        {
+          "key": "Fn1 实体键",
+          "val": "对焦区域模式 / 测光切换",
+          "desc": "右手单指盲操，抓拍时极速切换对焦范围"
+        },
+        {
+          "key": "Fn2 实体键",
+          "val": "100% 局部放大取景",
+          "desc": "对焦辅助神键，星空与微距对焦精准核验"
+        },
+        {
+          "key": "快门类型",
+          "val": "日常选【电子前帘 EFCS】/ 高速选【机械】",
+          "desc": "消除慢门机震；超高速快门防光斑削切"
+        }
+      ],
+      "pitfall": "手持抓拍快门速度超过 1/2000s 时，务必切回机械快门，以防大光圈光斑被电子前帘切边削平；日常低速手持或上脚架则优先使用电子前帘以消除震动。"
+    },
+    {
+      "id": 2,
+      "idStr": "02",
+      "chap": "controls",
+      "category": "基础操控",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "三脚架必备",
+      "title": "上架拍摄的“画质锁”——关闭 VR 减震与开启「d3 延时曝光」",
+      "summary": "在三脚架长曝光时，彻底关闭镜头 VR 光学防抖并开启机身延时曝光，消除陀螺仪自激震动与手指按压机震，释放套头极致解析力。",
+      "steps": [
+        {
+          "strong": "第一步：关闭镜头光学减震（VR）",
+          "text": "按 <code>i</code> 键 ➜ 找到【减震（VR）】图标 ➜ 设为 <code>OFF（关闭）</code>。防抖陀螺仪在脚架静止状态下会因寻找震动而产生自激晃动，导致长曝光边缘发虚。"
+        },
+        {
+          "strong": "第二步：开启「d3 延时曝光模式」",
+          "text": "进入 <code>MENU</code> ➜ <code>自定义设定菜单</code> ➜ <code>d 拍摄/显示</code> ➜ <code>d3 延时曝光模式</code> ➜ 设为 <code>2秒</code> 或 <code>3秒</code>。"
+        },
+        {
+          "strong": "第三步：替代实体快门线",
+          "text": "按压快门后，相机会静止等待 2~3 秒待微小共振平息后再开启快门，零成本实现快门线级稳定性。"
+        }
+      ],
+      "params": [
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）或 A 档（光圈优先）",
+          "desc": "精准掌控景深与曝光时长"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100（原生最低基准）",
+          "desc": "锁死噪点，换取最高的动态范围与最干净暗部"
+        },
+        {
+          "key": "光圈选择",
+          "val": "16-50mm: f/8 | 50-250mm: f/8~f/10",
+          "desc": "两支套头的最佳解析力甜点区，避免 f/16 衍射发软"
+        },
+        {
+          "key": "防抖开关",
+          "val": "减震（VR）设为 OFF",
+          "desc": "消除脚架上的陀螺仪误补偿"
+        },
+        {
+          "key": "延时曝光",
+          "val": "d3 设为 2秒 或 3秒",
+          "desc": "彻底吸收手指触碰机身的下压力微震"
+        }
+      ],
+      "pitfall": "拍摄完毕离开三脚架转入街头手持时，务必第一时间按 i 键将 VR 防抖重新打开，并将 d3 延时切回关闭，避免手持抓拍出现延时错失瞬间或抖糊废片。"
+    },
+    {
+      "id": 25,
+      "idStr": "25",
+      "chap": "controls",
+      "category": "基础操控",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "模式预设",
+      "title": "告别繁琐翻菜单——将「三脚架长曝」与「街头手持抓拍」固化至 U1/U2 模式转盘",
+      "summary": "刚在脚架拍完长曝（关防抖、开延时、低 ISO），收脚架街拍时常因忘记开防抖或忘记关延时而废片。将两套对立模式固化在机顶 U1 和 U2 档位，拨动物理转盘 1 秒无感切换！",
+      "steps": [
+        {
+          "strong": "第一步：配置并保存【U1：三脚架极致画质模式】",
+          "text": "调好 M 档、f/8、5s、ISO 100、VR 设 OFF、d3 延时曝光 2秒、单点对焦、风景优化校准 ➜ 进入 <code>MENU</code> ➜ <code>设置菜单（扳手）</code> ➜ <code>保存用户设定</code> ➜ <code>保存至 U1</code> 确认。"
+        },
+        {
+          "strong": "第二步：配置并保存【U2：街头手持快拍模式】",
+          "text": "调好 A 档、f/4.5~5.6、VR 设 ON、d3 延时设 OFF、Auto ISO 最小快门 1/250s、AF-C + 广域人物眼部追踪、触控快门开启 ➜ <code>设置菜单</code> ➜ <code>保存至 U2</code> 确认。"
+        }
+      ],
+      "params": [
+        {
+          "key": "转盘档位",
+          "val": "物理转动至 U1",
+          "desc": "物理转动至 U2"
+        },
+        {
+          "key": "曝光控制",
+          "val": "M 档（全手动）",
+          "desc": "A 档（光圈优先）"
+        },
+        {
+          "key": "感光度",
+          "val": "锁死 ISO 100（纯净无噪）",
+          "desc": "Auto ISO（最小快门锁 1/250s）"
+        },
+        {
+          "key": "镜头防抖",
+          "val": "VR 关（彻底消除机震）",
+          "desc": "VR 开（补偿手抖）"
+        },
+        {
+          "key": "快门延时",
+          "val": "开启 d3 延时 2 秒（免快门线）",
+          "desc": "关闭延时（按下即击发）"
+        },
+        {
+          "key": "对焦系统",
+          "val": "单点 / MF 精准合焦",
+          "desc": "AF-C + 人物眼部追踪 + 触控快门"
+        }
+      ],
+      "pitfall": "临时微调不破坏预设：在 U1 或 U2 档位下随时可以临时拨动波轮改快门或光圈；一旦关机重启或转动转盘离开后再切回，相机会自动恢复到最初保存的最佳默认值，绝无参数遗留隐患。"
+    },
+    {
+      "id": 29,
+      "idStr": "29",
+      "chap": "controls",
+      "category": "基础操控",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "手持 / 三脚架",
+      "title": "告别夜间对焦“拉风箱”——开启「低光度 AF」与暗光合焦破局法则",
+      "summary": "套头在暗光下常拉风箱或射出刺眼对焦绿光。开启 Z30 隐藏的低光度 AF 将极限下探至 -4.5 EV，并关闭辅助照明灯，实现微光下的安静秒速合焦。",
+      "steps": [
+        {
+          "strong": "第一步：开启「低光度 AF」",
+          "text": "<code>MENU</code> ➜ <code>自定义设定菜单</code> ➜ <code>a 对焦</code> ➜ <code>a10 低光度 AF</code> ➜ 设为 <code>ON</code>。在 AF-S 模式下将暗光合焦极限下探至 -4.5 EV（微弱月光即可自动对焦）。"
+        },
+        {
+          "strong": "第二步：关闭「内置 AF 辅助照明灯」",
+          "text": "进入 <code>a9 内置 AF 辅助照明器</code> ➜ 设为 <code>OFF</code>。消除夜拍刺眼绿光，扫街隐蔽防打扰，隔窗拍摄彻底杜绝玻璃反光。"
+        },
+        {
+          "strong": "第三步：单点对焦锁定明暗交界",
+          "text": "相位对焦依赖反差，切忌对准纯黑夜空或无反光的柏油路，将单点框放在有光影交界的建筑线条或霓虹招牌边缘。"
+        }
+      ],
+      "params": [
+        {
+          "key": "对焦伺服模式",
+          "val": "AF-S（单次对焦）",
+          "desc": "只有在 AF-S 下低光度 AF 才会全力激活"
+        },
+        {
+          "key": "AF 区域模式",
+          "val": "单点自动对焦 或 精确自动对焦",
+          "desc": "缩小侦测面积，精准点选高反差边缘"
+        },
+        {
+          "key": "低光度 AF（a10）",
+          "val": "ON（开启）",
+          "desc": "大幅增强微光对焦性能"
+        },
+        {
+          "key": "辅助照明灯（a9）",
+          "val": "OFF（关闭）",
+          "desc": "消除刺眼灯光，防社死防反光"
+        },
+        {
+          "key": "极端手动兜底",
+          "val": "切 MF 配合放大键 100% 放大",
+          "desc": "荒野极端黑夜下手动拧至最锐锁焦"
+        }
+      ],
+      "pitfall": "避免在暗光下使用 AF-C 强行抓拍：暗光环境下连续对焦易因光子不足频繁丢焦；夜拍静止建筑或停顿路人时，优先使用 AF-S 配合低光度 AF，成片率最高。"
+    },
+    {
+      "id": 41,
+      "idStr": "41",
+      "chap": "controls",
+      "category": "基础操控",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "手持抓拍",
+      "title": "街头抓拍绝技「3D 追踪（3D-Tracking）」——像磁铁一样咬死动态目标，实现构图自由",
+      "summary": "抓拍运动目标时单点对焦太慢，自动对焦又常猜错。尼康 3D 追踪根据目标颜色、纹理与轮廓如磁铁般死死吸住，目标在画框中乱跑或你随意重新构图，焦点绝不脱靶。",
+      "steps": [
+        {
+          "strong": "第一步：理解 3D 追踪逻辑",
+          "text": "自动对焦是相机猜你想拍谁；3D 追踪是你指定谁相机就咬死谁。用中央小准星对准主体半按快门锁定，系统瞬间提取特征，焦点在 209 点矩阵中全屏随动跳跃。"
+        },
+        {
+          "strong": "第二步：设置「AF-C + 3D 追踪」",
+          "text": "按 <code>i</code> 键将对焦伺服设为 <code>AF-C</code>，AF 区域模式切换为 <code>3D 追踪（3D-Tracking）</code>。"
+        },
+        {
+          "strong": "第三步：锁定 ➜ 构图重组 ➜ 击发",
+          "text": "半按快门准星锁定目标，保持半按随意转动镜头重新进行三分法构图，主体移到黄金分割点瞬间深按快门击发！"
+        },
+        {
+          "strong": "第四步：防路人遮挡抢焦",
+          "text": "进入 <code>a3 锁定跟踪对焦</code> 设为 <code>3（标准）或 4（延迟）</code>，路人短暂穿过镜头前半秒时焦点不被带跑。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16-50mm (28-50mm) / 50-250mm (50-100mm)",
+          "desc": "经典中焦街拍视角，留足追踪运动的画框缓冲空间"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档或 S 档",
+          "desc": "动态场景优先保证速度"
+        },
+        {
+          "key": "快门速度",
+          "val": "保持在 1/320s ~ 1/500s 以上",
+          "desc": "彻底定格走动人物与街头宠物的运动毛边"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（最小快门锁 1/320s）",
+          "desc": "由相机自动分配感光度，专注构图与抓拍时机"
+        },
+        {
+          "key": "释放模式",
+          "val": "低速连拍（L: 3~4张/秒）或 高速连拍（H）",
+          "desc": "捕捉步态与神态连续微表情"
+        },
+        {
+          "key": "防抖设置",
+          "val": "VR 减震开启（NORMAL）",
+          "desc": "消除手持摆动机身时的晃动"
+        }
+      ],
+      "pitfall": "选择特征鲜明的落脚点：3D 追踪依靠色彩与反差识别。若目标通体纯黑无光泽容易跟丢；将准星对准有色差的部位（亮色围巾、背包肩带、浅色鞋子或猫额头花纹），吸附力成倍提升。"
+    },
+    {
+      "id": 9,
+      "idStr": "09",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 攻克大光比风光——三脚架「自动包围曝光（BKT）」与极致动态范围",
+      "summary": "日出日落大光比超过单张传感器宽容度。利用三脚架开启 Z30 的自动包围曝光（BKT），高速连拍 3 张不同曝光的 14-bit RAW，后期 3 秒一键合并为 32 位超高动态风光大片。",
+      "steps": [
+        {
+          "strong": "第一步：配置「自动包围（BKT）」",
+          "text": "<code>MENU</code> ➜ <code>照片拍摄菜单</code> ➜ <code>自动包围</code> ➜ 设为 <code>AE包围</code>；拍摄张数与步长设为 <code>3F 2.0</code>（欠曝 -2EV 抓晚霞高光、正常 0EV、过曝 +2EV 提地面阴影）。"
+        },
+        {
+          "strong": "第二步：释放模式设为「高速连拍（H）」",
+          "text": "按释放模式按键切为高速连拍。开启 BKT 时，按住快门相机会在 1 秒内连拍完预设的 3 张不同曝光照片并自动停止，机位完全零位移。"
+        },
+        {
+          "strong": "第三步：固定黄金光圈与锁焦",
+          "text": "必须在 A 档或 M 档将光圈固定在 <code>f/8</code>。严禁改变光圈值，必须完全由快门速度来改变曝光，确保 3 张照片景深与清晰度完全一致。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 28mm",
+          "desc": "广角纳入地平线大光比全景"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）或 M 档",
+          "desc": "锁死景深，由相机自动计算 3 张快门时间"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8（锁死）",
+          "desc": "16-50mm 风光黄金光圈，全景锐度最高"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，确保暗部提亮后依然没有杂色彩噪"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-S 单次或 MF 锁定",
+          "desc": "对焦在画面前景约 1/3 处，合焦后切勿重新对焦"
+        },
+        {
+          "key": "防抖开关",
+          "val": "上架关闭 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝连拍按快门瞬间的共振"
+        }
+      ],
+      "pitfall": "为什么不用机内 HDR？机内直接生成的 HDR 是单张 JPG，丢失了后期可调动态范围；而 BKT 保存的是 3 张独立的 14-bit RAW。导入 Lightroom 全选右键【照片合并 ➜ HDR】，系统会自动消除树枝微颤并输出顶级无噪大片。"
+    },
+    {
+      "id": 11,
+      "idStr": "11",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 竖构图全景接片——用 2088 万像素机身输出 6000 万+ 像素巨幅风光",
+      "summary": "面对辽阔天际线，单张 16mm 横拍不仅像素受限，边缘还有透视拉伸。将机身在三脚架上竖立安装，用 24-35mm 焦段水平重叠拍摄 4~6 张，后期无损拼接成超宽画幅大作。",
+      "steps": [
+        {
+          "strong": "第一步：三脚架竖装与调平",
+          "text": "机身竖拍能保留充足的天空与地面纵向空间，避免接片后上下被裁切得太扁。按 <code>DISP</code> 键调出电子水平仪，确保云台水平旋转 360 度始终保持绿线水平。"
+        },
+        {
+          "strong": "第二步：M 档锁死曝光 + 固定白平衡",
+          "text": "固定 f/8 光圈与快门；白平衡手动设为【晴天】或固定 5500K。若用自动参数，各张接片明暗色温微小差异会导致接缝出现斑马纹断层。"
+        },
+        {
+          "strong": "第三步：锁定手动对焦（MF）",
+          "text": "对焦在画面 1/3 处主体，合焦后切至 MF 锁死对焦环。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "24mm ~ 35mm（竖构图）",
+          "desc": "避开 16mm 边缘透视拉伸，此焦段畸变几乎为零，拼接重合度最高"
+        },
+        {
+          "key": "重叠范围",
+          "val": "每张相邻重叠 30% ~ 40%",
+          "desc": "为后期算法提供充足特征锚点，拍 4~6 张覆盖全景"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死每张切片的进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "最佳锐度甜点区，前后景深充足"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "保证巨幅放大打印依然细腻无噪点"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "避免旋转后按快门带来的机身晃动"
+        }
+      ],
+      "pitfall": "后期 5 秒一键合成：将照片导入电脑（Lightroom / Photoshop），全选右键【照片合并 ➜ 全景图（Panorama）】，投影选“圆柱”或“透视”，软件会自动完成几何矫正与无缝缝合，输出 6000 万至 8000 万像素超清大图。"
+    },
+    {
+      "id": 13,
+      "idStr": "13",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 经典风光“超焦距”实战——贴地大前景构图，从脚下到无限远全清晰",
+      "summary": "很多新手拍风光习惯把焦点对准远山，导致近处前景发虚。16mm f/8 在 APS-C 画幅下的超焦距仅为 1.6 米，将焦点落在 1.6 米处，景深即可从 0.8 米覆盖至无穷远全清。",
+      "steps": [
+        {
+          "strong": "第一步：理解 16mm f/8 的超焦距原理",
+          "text": "在 Z30 传感器上，16mm f/8 的超焦距距离约为 1.6 米。只要对焦在 1.6 米处，景深范围就是【0.8 米至无穷远】，无需缩小到 f/16 也能前后全清。"
+        },
+        {
+          "strong": "第二步：低机位大前景构图",
+          "text": "将三脚架降至贴地 20~30 厘米，翻转屏向上翻折 90 度俯视取景。让近处滩涂波纹、潮湿礁石或花草占据画面下半部 1/3 作为视觉引导线。"
+        },
+        {
+          "strong": "第三步：手动对焦（MF）锁定 1.6 米焦平面",
+          "text": "按 <code>i</code> 键切 <code>MF</code>，按放大键 100% 放大距镜头 1.5~1.8 米处的地面石头纹理，调至最锐后锁死对焦环。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（拧到最广端）",
+          "desc": "获得等效 24mm 宽广视野与最短超焦距距离"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档或 M 档",
+          "desc": "严禁改变光圈值"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "16-50mm 解析力最高点，兼顾超大景深与锐度"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，岩石暗部与天空过渡纯净无噪"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝按压快门共振"
+        },
+        {
+          "key": "优化校准",
+          "val": "风景（Landscape）微调中音调锐化+1.5",
+          "desc": "突出近处地表与远山质感"
+        }
+      ],
+      "pitfall": "切忌盲目收缩到 f/16 或 f/22！很多人以为“光圈越小景深越大”，在 APS-C 高密度传感器上，光圈小于 f/11 就会产生严重的光学衍射效应，导致全图细节变得松散软化。用 f/8 配合超焦距，画质远比 f/16 扎实锐利。"
+    },
+    {
+      "id": 19,
+      "idStr": "19",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 极致全景深——利用机身「焦距变化拍摄」玩转专业级景深合成",
+      "summary": "当镜头前 15 厘米处有一朵野花或冰晶纹理，同时数公里外的雪山也要锐利无比时，超焦距也无法兼顾，缩到 f/22 又会衍射模糊。利用 Z30 内置的焦距变化拍摄（Focus Shift），全自动拍摄一组焦点由近及远的切片照片后一键合成。",
+      "steps": [
+        {
+          "strong": "第一步：把起点对焦点放在“最近的前景”上",
+          "text": "焦距变化拍摄是单向向远处推进的。使用 AF-S 单点对准距离镜头最近的物体边缘（如 20 厘米处的石头尖角）合焦。"
+        },
+        {
+          "strong": "第二步：配置「焦距变化拍摄」",
+          "text": "<code>MENU</code> ➜ <code>照片拍摄菜单</code> ➜ <code>焦距变化拍摄</code> ➜ 拍摄张数设为 <code>15~25张</code>；焦距步幅设为 <code>2或3</code>（细密确保无盲区）；下次拍摄间隔设为 <code>0秒</code>；首张曝光锁定与静音拍摄均设为 <code>ON</code>。"
+        },
+        {
+          "strong": "第三步：一键启动全自动连拍",
+          "text": "按 OK 启动，相机在 2~3 秒内全自动无声微移对焦点完成连拍。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 28mm",
+          "desc": "广角纳入贴地超近大前景与远方全景"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死快门速度，确保所有切片进光量严格统一"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/8（最佳锐度区）",
+          "desc": "摆脱 f/22 衍射软化，全程享受镜头顶级解析力"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，画面极致细腻"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上三脚架关闭 VR",
+          "desc": "消除内部陀螺仪微震"
+        },
+        {
+          "key": "静音拍摄",
+          "val": "设为 ON（开启电子快门）",
+          "desc": "全程零机震且保护机械快门寿命"
+        }
+      ],
+      "pitfall": "Photoshop 极速全景深合成：打开 PS ➜【文件 ➜ 脚本 ➜ 将文件载入堆栈】，勾选【尝试自动对齐源图像】载入切片；全选图层后点击【编辑 ➜ 自动混合图层】，混合方法选【堆叠图像】并勾选【无缝色调和颜色】，30 秒即可生成前后全清风光神作。"
+    },
+    {
+      "id": 31,
+      "idStr": "31",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 白天流云拉丝——无需 ND 滤镜的「数码减光镜（均值堆栈）」实战",
+      "summary": "大风天流云充满动势。无需昂贵的十档减光镜（ND1000），利用 16-50mm 配合三脚架间隔连拍 40 张，在 PS 中使用“平均值（Mean）”堆栈，在白天完美模拟出 100 秒长曝流云大片。",
+      "steps": [
+        {
+          "strong": "第一步：为什么是平均值而不是中间值？",
+          "text": "消人术用中间值剔除异常运动像素；而流云拉丝必须用平均值（Mean）！它把 40 张照片的云彩位移平滑融合相加，等效于高档 ND 镜超长时间曝光。"
+        },
+        {
+          "strong": "第二步：M 档锁死曝光与色温",
+          "text": "M 档固定 f/8、ISO 100、快门按白天正常测光（如 1/250s）；白平衡固定【晴天 5500K】；对焦在远景山脊合焦后切 MF 锁死。"
+        },
+        {
+          "strong": "第三步：开启「间隔定时拍摄」录制 80 秒",
+          "text": "<code>MENU</code> ➜ <code>间隔定时拍摄</code> ➜ 间隔时间设为 <code>2秒</code>；拍摄张数设为 <code>40 × 1</code>；开启静音拍摄（电子快门零震动）。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（最广角）",
+          "desc": "最大化天幕视野，流云在边缘形成极具张力的放射拉伸"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死每张切片的进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "享受 16-50mm 最佳边缘解析力，地面建筑极其锐利"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/125s ~ 1/500s（正常日间测光）",
+          "desc": "常规日间高速快门，无需担心过曝"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，画面纯净细腻"
+        },
+        {
+          "key": "后期合成",
+          "val": "PS 载入堆栈创建智能对象 ➜ 堆栈模式选【平均值 Mean】",
+          "desc": "30 秒自动完成平滑流云化"
+        }
+      ],
+      "pitfall": "构图找准“迎风/顺风”视觉汇聚线：仰头观察云彩飘动方向，迎着风向（云向你扑来）或顺着风向（云向远方飘走）构图效果最震撼，云层拉丝会呈放射线汇聚向画面中心或地标山峰，构成天然三维透视引导线。"
+    },
+    {
+      "id": 32,
+      "idStr": "32",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持 / 三脚架",
+      "title": "16-50mm 白天太阳星芒（Sunstar）——巧用“10% 边缘遮挡”与 f/11 衍射，拍出钻石般 14 芒芒尖",
+      "summary": "太阳裸露在天空中是面光源无法成芒。利用 16-50mm 掌握“10% 边缘半遮挡”，让太阳从树干或屋檐仅露出一丝针尖微光，收缩至 f/11 瞬间引爆 14 根钻石般的辐射状星芒射线。",
+      "steps": [
+        {
+          "strong": "第一步：10% 边缘半遮挡法则",
+          "text": "移动机位让太阳被树干、大楼拐角、古建飞檐或山脊遮挡住 90%，只从缝隙中露出最边缘一丝针尖大小的刺眼亮光，瞬间将太阳转化为极小的强点光源。"
+        },
+        {
+          "strong": "第二步：光圈收缩至 f/11 ~ f/13 黄金星芒区",
+          "text": "16-50mm 拥有 7 片圆形光圈叶片，收缩到 f/11 时叶片夹角衍射出 7×2=14 根锋利修长的星芒尖刺。避免缩到 f/22 导致全图衍射软化。"
+        },
+        {
+          "strong": "第三步：开启「动态 D-Lighting（强）」",
+          "text": "按 <code>i</code> 键开启，在压制太阳高光溢出的同时，强力提亮树皮纹理与背阴建筑细节，避免遮挡物沦为死黑一片。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm（广角端）",
+          "desc": "广角景深大，对边缘遮挡的星芒衍射效应最敏感"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定星芒黄金光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11 ~ f/13",
+          "desc": "激发出 14 根细长锐利的针尖星芒"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，确保逆光高动态下暗部纯净无噪"
+        },
+        {
+          "key": "测光模式",
+          "val": "高光重点测光 或 矩阵测光配 -0.7 EV",
+          "desc": "压制太阳周边天幕过曝，星芒射线根根分明"
+        },
+        {
+          "key": "优化校准",
+          "val": "自然（Neutral）微调清晰度+1.0、对比度+0.5",
+          "desc": "增强星芒穿透感"
+        }
+      ],
+      "pitfall": "彻底擦净前组镜片！太阳直射镜头时，前组镜片表面只要有一丁点指纹油脂或灰尘，强光漫反射就会产生大面积灾难性彩虹眩光雾和脏光斑，直接摧毁星芒。拍摄前务必用无尘镜头纸彻底擦拭镜片。"
+    },
+    {
+      "id": 51,
+      "idStr": "51",
+      "chap": "landscape",
+      "category": "广角风光",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架 / 贴水放置",
+      "title": "16-50mm 天空之镜与完美对称——“极低贴水机位”与电子水平仪打造无缝倒影大片",
+      "summary": "高处拍倒影只能看到浑浊池底。利用 Z30 无军舰顶与侧翻屏优势，将 16-50mm 降至离水面仅 2~3 厘米处，配合电子水平仪 0.0° 绝对对准中线，慢门 3~8 秒抚平微波，拍出平行宇宙般的绝对无缝对称。",
+      "steps": [
+        {
+          "strong": "第一步：镜头贴水 2~3 厘米反射光学奇迹",
+          "text": "镜头轴心无限逼近水面时，入水夹角极小，水面瞬间转化为反射率近 100% 的水银平光镜，水陆交界线被压缩成一条发丝细线，水天无缝相接。"
+        },
+        {
+          "strong": "第二步：调出「虚拟水平线（电子水平仪）」",
+          "text": "按 <code>DISP</code> 键调出电子水平仪，转动云台直至水平线亮起代表绝对水平的【纯绿色指示条】，地平线精准对齐在画面的横向正中心（1:1 中分构图）。"
+        },
+        {
+          "strong": "第三步：Z30 侧翻屏低机位俯视取景",
+          "text": "侧翻屏向外翻开向上 90 度，人保持舒适蹲姿俯视构图，告别狼狈趴在湿泞地面的痛苦。"
+        },
+        {
+          "strong": "第四步：慢门 3s ~ 8s 彻底熨平微澜",
+          "text": "收光圈至 f/8~f/11，ISO 100，曝光 3~8 秒，任何细小水波彻底被抹平成光滑剔透的钢化玻璃镜面。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（最广角端）",
+          "desc": "纳入宽广天幕云彩与完整水面倒影镜像"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档 或 A 档",
+          "desc": "精准掌控景深与慢门时长"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/11",
+          "desc": "最佳解析力，确保天空云层与水面倒影全部清晰锐利"
+        },
+        {
+          "key": "快门速度",
+          "val": "3s ~ 8s",
+          "desc": "彻底消除水面微风涟漪，还原极致镜像"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证天空大面积亮色渐变细腻无噪点"
+        },
+        {
+          "key": "构图法则",
+          "val": "1:1 绝对中分构图（地平线置中）",
+          "desc": "追求极致对称的几何秩序美"
+        }
+      ],
+      "pitfall": "寻找“避风死角”：水面哪怕很浅，狂风大作时也会吹出乱纹。最佳拍摄点是建筑物背风面、庭院避风池塘、或树林掩映下的死角水洼；雨后地面哪怕只有一张 A4 纸大小的浅积水，贴地 2 厘米即可倒映出整座摩天大楼与晚霞烧云！"
+    },
+    {
+      "id": 6,
+      "idStr": "06",
+      "chap": "telephoto",
+      "category": "长焦风光",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架 / 手持",
+      "title": "50-250mm 长焦风光与建筑——利用“空间压缩感”提炼几何与山峦层次",
+      "summary": "广角负责交代宏大场面，长焦负责提炼局部秩序。利用 100-200mm 端将数公里外的远山与楼宇拉到同一平面，消除杂乱前景。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 100mm ~ 200mm 黄金压缩焦段",
+          "text": "等效全画幅 150mm~300mm，空间压缩最显著，远方地标被放大并紧紧贴合在中景山峦上。"
+        },
+        {
+          "strong": "第二步：启用「高光重点测光」",
+          "text": "按 <code>i</code> 键 ➜ 测光切换为【高光重点测光】。在晨曦或夕阳晚霞中，优先确保天空云彩与向阳建筑不溢出死白。"
+        },
+        {
+          "strong": "第三步：单点对焦与景深控制",
+          "text": "长焦景深浅，不要对焦在无限远山头，而应将单点对焦点放在【画面前景向内约 1/3 处的主体边缘】，光圈收至 f/8~f/10，兼顾前后全景深。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "100mm ~ 200mm（等效 150mm~300mm）",
+          "desc": "空间压缩感与边缘成像锐度的最佳平衡区"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）或 M 档",
+          "desc": "精准掌控景深"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/10",
+          "desc": "50-250mm 最高分辨率光圈，有效压制色散"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "上架原生基准低感，确保暗部纯净"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-S 单次伺服 + 单点对焦",
+          "desc": "精确瞄准几何边缘"
+        },
+        {
+          "key": "优化校准",
+          "val": "风景（Landscape）微调清晰度+1.0",
+          "desc": "强化建筑钢构线条与山脊硬朗轮廓"
+        }
+      ],
+      "pitfall": "避开正午地面热浪（热湍流效应）！正午阳光加热地表导致上升气流剧烈扰动，几公里外的建筑线条会像波浪般扭曲模糊。最佳拍摄时间是清晨日出后 1 小时内或傍晚冷热平稳时。"
+    },
+    {
+      "id": 14,
+      "idStr": "14",
+      "chap": "telephoto",
+      "category": "长焦风光",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架 / 手持",
+      "title": "50-250mm 捕捉“丁达尔神光（耶稣光）”——长焦压缩光路与点测光压暗剪影实战",
+      "summary": "清晨林间或云隙中，阳光穿透薄雾形成丁达尔光束。广角拍容易分散稀薄，用 100-200mm 长焦特有的纵向空间压缩力，能将数公里内的光束紧密叠压在一起，营造震撼神圣感。",
+      "steps": [
+        {
+          "strong": "第一步：长焦压缩光路（100mm ~ 200mm 黄金段）",
+          "text": "将几公里纵深内的一道道光柱“压缩”在一个紧凑画框中，视觉上光束浓度与对比度成倍增强。"
+        },
+        {
+          "strong": "第二步：压暗阴影，制造极致反差",
+          "text": "按 <code>i</code> 键 ➜ 测光选【点测光】或【高光重点测光】；按住机顶 <code>+/-</code> 键向负向调节 <code>-0.7 EV 至 -1.3 EV</code>。必须主动压暗让前景树木或山峦彻底化为纯黑剪影，光柱才会清晰耀眼地脱颖而出。"
+        },
+        {
+          "strong": "第三步：手动白平衡锁定金色辉光",
+          "text": "按 <code>i</code> 键 ➜ 白平衡选 <code>K</code> ➜ 调至 <code>6000K ~ 6500K</code>（或选阴天模式），赋予光柱与薄雾醇厚通透的暖金色，避免自动白平衡把金色晨曦误判为惨白。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "100mm ~ 200mm",
+          "desc": "提炼局部光束，避开周边杂乱死白天空"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）或 M 档",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/10",
+          "desc": "长焦最佳边缘锐度，穿透树缝的光束边缘更清晰锋利"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，确保暗部黑色剪影纯净无彩噪"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-S 单点对准剪影高对比边缘合焦后切 MF 锁死",
+          "desc": "防止对准空无一物的光雾拉风箱"
+        },
+        {
+          "key": "优化校准",
+          "val": "风景（Landscape）微调对比度+1.0",
+          "desc": "最大化明暗戏剧张力"
+        }
+      ],
+      "pitfall": "寻找“半遮挡”机位：不要把镜头正对毫无遮挡的裸露大太阳，强光会导致镜头严重发灰眩光。最好的机位是让太阳处于树冠、云朵边缘或山脊刚好遮挡住一半的位置，光束发散效果最为明显。"
+    },
+    {
+      "id": 27,
+      "idStr": "27",
+      "chap": "telephoto",
+      "category": "长焦风光",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持 / 三脚架",
+      "title": "50-250mm 建筑极简几何与硬影切割——晴天长焦的“二维平面化”视觉魔术",
+      "summary": "晴天大中午光线生硬，反而是长焦极简建筑摄影的黄金时刻。利用 100-200mm 消除近大远小的透视倾斜，将大楼线条与刀削般的阴影压成二维抽象画。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 100mm ~ 200mm 消除透视畸变",
+          "text": "站在数百米外远摄，建筑垂直柱和水平窗框几乎绝对平行，消除广角仰拍时的大楼向内倒塌感。"
+        },
+        {
+          "strong": "第二步：点测光直对亮部",
+          "text": "测光切为【点测光】，将测光点置于阳光直射的白色墙面，大光比瞬间把背阴面和窗洞阴影压成深邃纯黑，形成强烈黑白几何拼图。"
+        },
+        {
+          "strong": "第三步：优化校准“单色 + 红滤镜”",
+          "text": "优化校准选【单色】，滤镜效果选【红（Red）】，对比度拉高至 +2.0，蓝天彻底压暗为黑幕，与白色混凝土线条形成极高反差。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "100mm ~ 180mm（等效 150mm~270mm）",
+          "desc": "裁切杂乱地面前景，精准框取建筑局部的几何韵律"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "最佳画质甜点区，边缘无暗角无色散"
+        },
+        {
+          "key": "快门速度",
+          "val": "自动（通常在 1/500s 以上）",
+          "desc": "晴天强光下快门极高，手持皆锐利"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，确保纯黑阴影与亮白墙面纯净无噪"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-S 单点",
+          "desc": "精准对准明暗交界线上的一处硬边合焦"
+        }
+      ],
+      "pitfall": "寻找画面的“破局点”：在整齐划一的几何阴影中，若恰好有一扇窗打开、挂着一盆绿色盆栽、或一只鸟恰好飞过几何切面，画面瞬间由死板图形升级为富有生命力的大作。"
+    },
+    {
+      "id": 35,
+      "idStr": "35",
+      "chap": "telephoto",
+      "category": "长焦风光",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 远山晨雾与水墨意境——长焦“空气透视”与高调黑白直出实战",
+      "summary": "阴雨大雾天是长焦镜头的黄金期。利用 135-250mm 端空气透视的阶调递减，配合白加曝光补偿与单色降低对比度，直出如宣纸水墨画般“墨分五色、虚实相生”的高雅大片。",
+      "steps": [
+        {
+          "strong": "第一步：理解长焦空气透视",
+          "text": "水汽对光线产生散射，近处山体黑而浓郁、中景呈中灰、远景淡如青烟，长焦跳过杂乱前景，天然构成传统国画浓淡干湿焦的层次秩序。"
+        },
+        {
+          "strong": "第二步：白加黑减——主动增加曝光补偿（+0.7 EV 至 +1.3 EV）",
+          "text": "大面积白雾会导致测光误判而疯狂压暗变成脏水泥灰；主动提升曝光补偿，果断将白雾提亮至纯白宣纸般的通透高调（High-key）质感。"
+        },
+        {
+          "strong": "第三步：调校“宣纸水墨”优化校准",
+          "text": "单色模式下，<strong>对比度主动降至 -0.5 或 -1.0</strong>（舒展由深灰到浅灰的连续渐变色阶），中音调锐化设为 +1.5（突出山脊松柏苍劲笔触）。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "135mm ~ 250mm（等效 200mm~375mm）",
+          "desc": "精准剥离地面杂乱前景，紧紧框取山脊韵律线条"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/10",
+          "desc": "保证长焦端全图最高解析力，让山峦边缘毛笔勾勒感十足"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "上架原生低感，确保纯白雾气中绝无杂色颗粒"
+        },
+        {
+          "key": "曝光补偿",
+          "val": "+0.7 EV 至 +1.3 EV",
+          "desc": "严格贯彻“白加”法则，让雾气晶莹透白"
+        },
+        {
+          "key": "防抖开关",
+          "val": "上架关闭 VR + 开启 d3 延时 2 秒",
+          "desc": "消除长焦机身微震"
+        }
+      ],
+      "pitfall": "构图留白与画眼：让洁白的云雾留白占据画面的 40%~50%，虚实相生。寻找破局的“画眼”：破雾而出的悬崖孤松、山巅隐约露出的古亭飞檐、或掠过山涧的一只飞鸟，瞬间赋予整幅水墨作品灵魂。"
+    },
+    {
+      "id": 40,
+      "idStr": "40",
+      "chap": "telephoto",
+      "category": "长焦风光",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架 / 手持",
+      "title": "50-250mm 长焦“画中画（框架构图）”——利用桥洞、门框与枝隙构筑纵深诗意",
+      "summary": "广角靠近门洞拍，门洞巨大而远景缩成芝麻点。后退数十米开外，用 135-250mm 端穿透门窗框架远摄，将数公里外的远景地标放大并稳稳装进近处的框架里，营造画中画奇景。",
+      "steps": [
+        {
+          "strong": "第一步：距离魔法——退后百米，长焦吊取",
+          "text": "人后退 50~100 米，长焦端把远近相对距离差急剧压缩。远处的古塔或雪山显得极其庞大，恰好填满近处的石桥孔洞或月亮门，宛如人工装裱的挂画。"
+        },
+        {
+          "strong": "第二步：单点对焦“穿针引线”锁定远景",
+          "text": "若用广域对焦会抢焦在门框上；必须使用单点对焦框穿过框架空隙，丝毫不差地钉在远景地标建筑的几何硬边上合焦。"
+        },
+        {
+          "strong": "第三步：双重影调选择",
+          "text": "剪影风格选点测光对准远景亮处，近处桥孔压为纯黑剪影画框；全景深风格收缩光圈至 f/10~f/11，开启 BKT 包围曝光合成门内与门外的巨大光比。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "135mm ~ 250mm（等效 200mm~375mm）",
+          "desc": "压扁纵深空间，使背景巨大化并严密填满框架"
+        },
+        {
+          "key": "拍摄机位",
+          "val": "距离前景框架 30米 ~ 80米 开外",
+          "desc": "确保框架在长焦视场中占比协调，不挤压画面"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档或 M 档",
+          "desc": "精准控制景深与曝光"
+        },
+        {
+          "key": "光圈选择",
+          "val": "剪影风格选 f/8 | 全清风格选 f/10 ~ f/11",
+          "desc": "保证长焦端最佳解析力"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证画面通透无彩噪"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝超长焦机身微震"
+        }
+      ],
+      "pitfall": "寻找天然框架：中式园林月亮门、八角海棠窗；桥下低角度半圆拱形石桥洞框住现代摩天楼群；两棵大树自然交叉的向内弯曲枝干构成的天然椭圆框，充满探秘式的空间呼吸感。"
+    },
+    {
+      "id": 7,
+      "idStr": "07",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 蓝调夜景与倒影——用色温与慢门锁住“冷暖交织”的城市流光",
+      "summary": "日落后 20~30 分钟的“蓝调时刻（Blue Hour）”是夜景黄金期。手动压低色温至 3600K 配合 5~15 秒长曝光，抚平水面波纹，呈现深蓝夜空与金黄灯火的强烈碰撞。",
+      "steps": [
+        {
+          "strong": "第一步：手动锁定冷调色温（3600K ~ 3800K）",
+          "text": "按 <code>i</code> 键 ➜ 白平衡切换为 <code>K（选择色温）</code> ➜ 拨动拨盘设在 3600K~3800K。自动白平衡容易被黄路灯欺骗导致天空偏脏；手动低 K 值强制还原本真幽蓝。"
+        },
+        {
+          "strong": "第二步：开启「动态 D-Lighting（ADL）」",
+          "text": "按 <code>i</code> 键 ➜ 动态 D-Lighting 设为【标准】或【高】。压制大楼景观灯高光溢出，同时提亮暗部建筑轮廓。"
+        },
+        {
+          "strong": "第三步：负向微调曝光补偿（-0.3 EV 至 -0.7 EV）",
+          "text": "按住机顶 <code>+/-</code> 键向负向调节，压暗天空使夜色更浓郁，保护招牌文字不过曝。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm",
+          "desc": "广角纳入水面与天空全景，呈现水天一色"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档或 M 档",
+          "desc": "精准掌控光圈与快门"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/10",
+          "desc": "16-50mm 最佳画质区，路灯呈现细腻星芒"
+        },
+        {
+          "key": "快门速度",
+          "val": "5s ~ 15s（随天色转暗延长）",
+          "desc": "慢门将江面波纹完全平整化为水银镜面"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "锁死噪点，暗部深邃通透"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝慢门按压共振"
+        }
+      ],
+      "pitfall": "蓝调时刻转瞬即逝（每天仅有 15~25 分钟窗口）！必须在日落前 15 分钟就架好三脚架并构图完毕，等待城市景观灯点亮的刹那立刻连续拍摄。"
+    },
+    {
+      "id": 10,
+      "idStr": "10",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 车轨拉丝与星芒——立交桥俯拍与 f/11 绚丽光轨实战",
+      "summary": "16-50mm 拥有 7 片光圈叶片。收缩至 f/11 时光线剧烈衍射出 14 根如针尖般锋利的放射状星芒。配合 M 档 15-25 秒慢门，将红白车流拉成平滑丝绢。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 f/11 激发 14 芒锐利星芒",
+          "text": "收缩至 f/11 时，叶片夹角形成规则几何锐角，画面中所有路灯点光源瞬间绽放出细腻修长的 14 条星芒。"
+        },
+        {
+          "strong": "第二步：弃用自动测光，切 M 档锁死 15s~25s 快门",
+          "text": "车流驶入画面会导致 A 档误判而提前中断曝光；M 档设定 15~25 秒刚好完整覆盖一次红绿灯放行车流，光轨连贯无断点。"
+        },
+        {
+          "strong": "第三步：静止建筑物手动锁焦（MF）",
+          "text": "切 <code>MF</code>，放大键 100% 放大路边静止的建筑招牌或路灯柱，手动调至最锐后锁死，避免对焦系统被穿梭的车灯干扰。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 20mm",
+          "desc": "广角纳入 S 弯或立体交叉路口，强化透视引导线"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "完全锁定曝光，红白光轨亮度均匀稳定"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11",
+          "desc": "最佳星芒与大景深平衡点（避免 f/16 产生衍射发软）"
+        },
+        {
+          "key": "快门速度",
+          "val": "15s ~ 25s",
+          "desc": "匹配车流穿过取景画面的平均耗时"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "最低感光度，暗部纯净无噪点"
+        },
+        {
+          "key": "白平衡",
+          "val": "4000K ~ 4500K 或晴天",
+          "desc": "突出冷色路面与暖色车灯/霓虹的高级对比"
+        },
+        {
+          "key": "防抖开关",
+          "val": "上架关闭 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝微震"
+        }
+      ],
+      "pitfall": "警惕天桥微共振！很多过街人行天桥在大型公交车、重卡经过时会产生肉眼难辨的微颤，长曝必糊。拍摄前观察路面，选择没有重型车辆经过且行人稀少的间歇击发快门。"
+    },
+    {
+      "id": 22,
+      "idStr": "22",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "both",
+      "lensDesc": "16-50mm 与 50-250mm 双镜头",
+      "mountDesc": "三脚架",
+      "title": "斜拉桥与大桥夜景实战——双套头视角选择与钢索琴弦光影韵律",
+      "summary": "斜拉桥是兼具力量感与几何美感的夜景题材。16-50mm 负责桥底仰拍的放射张力，50-250mm 负责隔江远摄的空间压缩竖琴韵律，双视角完美互补。",
+      "steps": [
+        {
+          "strong": "视角 A（16-50mm 广角仰拍）",
+          "text": "站在桥塔侧下方或桥头公园，拧至 16mm 端低角度向上仰拍。主塔耸入天际，密集的斜拉钢索呈放射状发散，桥面车轨如瀑布穿引。"
+        },
+        {
+          "strong": "视角 B（50-250mm 长焦平视）",
+          "text": "站在距大桥 1~2 公里的江堤对岸，用 100~200mm 端远摄。压缩透视把远近钢索叠压在同一平面上，呈现如琴弦般细密平行的极简韵律。"
+        },
+        {
+          "strong": "严控大桥景观泛光射灯",
+          "text": "切 M 档，光圈设 f/8~f/11，ISO 100，快门 8~15s，以桥塔高光不溢出为基准；白平衡设为 <code>3800K~4200K</code> 还原钢结构冷峻质感。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm",
+          "desc": "135mm ~ 180mm"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "M 档（全手动）"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11（激发桥面路灯 14 芒星芒）",
+          "desc": "f/8 ~ f/9（保证钢索边缘解析力）"
+        },
+        {
+          "key": "快门速度",
+          "val": "15s ~ 25s（拉满桥面红白车轨）",
+          "desc": "8s ~ 15s（抚平江面波浪倒影）"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "ISO 100"
+        },
+        {
+          "key": "对焦方式",
+          "val": "MF（放大对准桥塔字迹合焦）",
+          "desc": "MF（放大对准主塔缆索连接处合焦）"
+        }
+      ],
+      "pitfall": "避开桥体路面自身震动！切忌将三脚架架在桥梁人行道或引桥桥面上，大型重卡驶过时桥梁会产生剧烈微震，长曝必糊。三脚架必须架设在坚固的江堤陆地或远离桥体的坚实观景台上。"
+    },
+    {
+      "id": 37,
+      "idStr": "37",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "窗台平放 / 零成本脚架",
+      "title": "16-50mm 高空隔窗夜景实战——消灭玻璃反光与窗台“零成本脚架”长曝秘籍",
+      "summary": "高空观景台或高层酒店严禁架设三脚架，且室内灯光反光严重。利用 16-50mm 极短镜身与 Z30 平整机底，紧贴玻璃遮光并平放于窗台台面，开启 d3 延时 2 秒，实现零成本纯净高空长曝。",
+      "steps": [
+        {
+          "strong": "第一步：关闭内置 AF 辅助灯",
+          "text": "进入 <code>a9 内置 AF 辅助照明器</code> 设为 <code>OFF</code>，严防绿色对焦灯在玻璃内侧形成刺眼漫反射反光致盲对焦。"
+        },
+        {
+          "strong": "第二步：消灭玻璃倒影的贴窗遮光法则",
+          "text": "将 16-50mm 镜头前沿贴近玻璃（留 1 毫米微距防刮），脱下随身深色外套或围巾在镜头四周严密包裹一圈，彻底阻绝身后室内反光。"
+        },
+        {
+          "strong": "第三步：窗台平放 + 翻转屏 90° 俯视",
+          "text": "Z30 机底平整无取景器凸起，直接平稳放在窗台大理石台面或安全护栏上，镜头下垫一包纸巾微调下俯角。"
+        },
+        {
+          "strong": "第四步：开启 d3 延时 2 秒",
+          "text": "按完快门双手完全离开相机，等待 2 秒微震平息后开启 5~10 秒长曝光，成片与专业三脚架毫无二致！"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm",
+          "desc": "广角纳入辽阔天际线与纵深街道脉络"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "精准掌控曝光，避免高空大面积黑夜误导测光"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "16-50mm 画质最佳甜点区，中心到边缘最锐"
+        },
+        {
+          "key": "快门速度",
+          "val": "5s ~ 10s",
+          "desc": "将地面纵横交错的道路车流拉成长长的金色流光"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "锁死原生基准低感，黑色夜空细腻纯净无彩噪"
+        },
+        {
+          "key": "白平衡",
+          "val": "3600K ~ 3800K",
+          "desc": "赋予城市夜景清透深邃的冷蓝色天幕"
+        },
+        {
+          "key": "防抖开关",
+          "val": "平放窗台时关闭 VR",
+          "desc": "防止陀螺仪自激震动"
+        }
+      ],
+      "pitfall": "隔窗手动精准锁焦：若窗外微弱雾气导致自动对焦偶有犹豫，直接按 i 键切 MF，在翻转屏上按放大键将数公里外的一栋地标发光招牌放大至 100%，手动转动对焦环调至字迹最锐利后锁死，百发百中。"
+    },
+    {
+      "id": 38,
+      "idStr": "38",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 长焦立体立交桥车轨——空间压缩打造“密集光之过山车”",
+      "summary": "广角拍立交车轨空旷零散。换上 50-250mm 处于 100-180mm 端配合三脚架，利用空间压缩将地面辅道、主桥面与多层旋转匝道叠压在一起，织就一张密不透风的立体光轨之网。",
+      "steps": [
+        {
+          "strong": "第一步：空间压缩——线密度暴增",
+          "text": "站在距离立交枢纽几百米外的制高点，100-180mm 焦段剔除边缘杂乱楼房，把多层不同纵深的匝道压进同一个画框，形成极度饱满的视觉冲击。"
+        },
+        {
+          "strong": "第二步：MF 锁定“中层结构”",
+          "text": "切 <code>MF</code> 手动对焦，放大键 100% 放大中间那一层立交桥的混凝土桥墩或静止路牌调至最锐后锁死，确保从下层到上层全部处于清晰景深内。"
+        },
+        {
+          "strong": "第三步：M 档锁定 15s ~ 25s",
+          "text": "时间恰好让一辆车从底层入弯匝道完整开上最顶层主桥，确保每条弧线匝道都有连贯平滑的光带绸缎。"
+        },
+        {
+          "strong": "第四步：开启 d3 延时曝光 3 秒",
+          "text": "长焦端等效 150mm 以上时按键下压力惯性更强，3 秒延时彻底消除微小的杠杆共振。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "100mm ~ 180mm（等效 150mm~270mm）",
+          "desc": "精准框取立体匝道交错的核心区域，剔除边缘杂光"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "固定曝光，确保各层光轨亮度均匀饱满"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/10",
+          "desc": "最佳解析力区，桥体水泥质感坚实，景深覆盖前后匝道"
+        },
+        {
+          "key": "快门速度",
+          "val": "15s ~ 25s",
+          "desc": "留足时间让车流完整画满各层弧度"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证黑色桥下阴影纯净无彩噪"
+        },
+        {
+          "key": "白平衡",
+          "val": "3800K ~ 4200K",
+          "desc": "路面呈冷峻清澈沥青灰蓝，与红白车轨强烈反差"
+        },
+        {
+          "key": "防抖开关",
+          "val": "上三脚架关闭 VR",
+          "desc": "消除内部陀螺仪微震"
+        }
+      ],
+      "pitfall": "长焦镜头伸长后受风面积大，高处拍摄时风力强劲。三脚架中轴切勿升起，尽量将脚架压低，必要时将摄影包挂在三脚架底部挂钩上增加下压力，确保 20 秒曝光纹丝不动。"
+    },
+    {
+      "id": 47,
+      "idStr": "47",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "both",
+      "lensDesc": "16-50mm 与 50-250mm 双镜头",
+      "mountDesc": "三脚架",
+      "title": "双变焦镜头专属特技「拉焦摄影（Zoom Burst）」——1s~2s 曝光中旋转变焦环，拍出时空穿梭般的星芒爆炸流光",
+      "summary": "定焦做不到的变焦专属外挂。在 1~2 秒慢门曝光过程中手动匀速旋转变焦环，所有霓虹灯与路灯被拉扯成直奔中心辐射的速度线，瞬间蜕变为科幻大片中的时空隧道。",
+      "steps": [
+        {
+          "strong": "第一步：理解变焦拖影轨迹",
+          "text": "由长焦旋向广角（50mm➜16mm）呈向中心黑洞吸入的坍缩感；由广角旋向长焦（16mm➜50mm）呈由内向外爆裂辐射的超光速跳跃感（Warp Speed）。"
+        },
+        {
+          "strong": "第二步：“静止半秒 + 匀速旋转”大师手法",
+          "text": "快门开启的前 0.5~1 秒双手不碰变焦环，让核心主体充分曝光留下清晰硬核本体；随后的 1 秒平稳匀速将变焦环拧到底！达成“中心扎实锐利 + 周围光芒爆炸发散”的精妙平衡。"
+        },
+        {
+          "strong": "第三步：顺滑旋转力学",
+          "text": "三脚架云台锁死关 VR，左手大拇指与食指轻柔夹住变焦环上下两侧顺着同心圆方向平稳旋动，切忌左右歪扭机身使线条变成波浪线。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头选择",
+          "val": "16-50mm（短行程易操控）/ 50-250mm（超长行程更震撼）",
+          "desc": "16-50mm 阻尼轻柔最适合新手练习手感"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死快门速度与光圈，避免测光干扰"
+        },
+        {
+          "key": "快门速度",
+          "val": "1.5s ~ 2s",
+          "desc": "黄金操作窗口（留足 0.5s 静止 + 1s 匀速旋转）"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/11",
+          "desc": "保证中心主体高解析力，压低进光防止过曝"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "锁死低感，确保黑色夜空背景纯净无噪点"
+        },
+        {
+          "key": "对焦模式",
+          "val": "单点合焦后切 MF（手动锁焦）",
+          "desc": "严禁自动对焦（变焦过程中 AF 会拉风箱）"
+        }
+      ],
+      "pitfall": "寻找中心有点光源围绕的场景：旋转摩天轮（对准中轴拉焦）、挂满彩灯的节日树、繁华路口霓虹门头、大桥主塔发光尖顶。旋转速度越快线条越细，多试几次微调手感节奏。"
+    },
+    {
+      "id": 48,
+      "idStr": "48",
+      "chap": "nightscape",
+      "category": "城市夜景",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 暗夜“刷光与光绘（Light Painting）”——用手机手电筒充当画笔，点亮前景与绘制流光大片",
+      "summary": "拍夜景或星空时近处礁石老树全是一片死黑。在 20~30 秒长曝光中，用手机手电筒在前景岩石上来回轻柔扫光 2~3 秒，瞬间点亮前景纹理；或在空中挥舞绘制发光翅膀与天使光球。",
+      "steps": [
+        {
+          "strong": "第一步：拯救死黑前景——手动刷光法",
+          "text": "相机开启 20 秒慢门后，打开手机手电筒站在相机侧方，像刷油漆一样对着近处礁石或树干来回均匀扫照 2~3 秒后立即关灯。前景瞬间立体显影，且完全不破坏背景夜空！"
+        },
+        {
+          "strong": "第二步：创意光绘——空气中挥舞流光",
+          "text": "让朋友静止站立，你拿着开启手电筒的手机站在身后朝向相机快速画出翅膀弧线。只要身体保持快速移动且穿深色衣服，画面中绝无你的身影，只有悬浮流光！"
+        },
+        {
+          "strong": "第三步：手电辅助精准锁焦（MF）",
+          "text": "先用手电照亮前景岩石，翻转屏按放大键 100% 放大手动调至最锐后锁死，关掉手电准备击发。"
+        },
+        {
+          "strong": "第四步：色温调控（3800K~4200K）",
+          "text": "手机 LED 白光在冷色温下呈温暖小麦金，夜空保持幽蓝，冷暖对撞极具电影质感。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（最广角）",
+          "desc": "纳入近处刷光前景与辽阔深远的夜空背景"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "完全锁定曝光时间与进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "保证前景到远景全清的大景深与顶级锐度"
+        },
+        {
+          "key": "快门速度",
+          "val": "20s ~ 30s",
+          "desc": "留足充裕时间从容进行 2~3 秒刷光或绘制光轨"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，黑色夜幕纯净无噪点"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝超长慢门机身微颤"
+        }
+      ],
+      "pitfall": "光绘者必须“保持走动 + 穿深色衣服”！负责挥舞光源的人切忌穿浅色反光衣服，且脚步不能停在原地。刷光角度以侧方 45 度为最佳，切忌站在相机正后方平直照射（否则如同机顶闪光灯般惨白扁平）。"
+    },
+    {
+      "id": 3,
+      "idStr": "03",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 拍出清晰月面环形山与悬日特写",
+      "summary": "月亮是被太阳直射的高亮天体。利用 250mm 端（等效 375mm）配合点测光、M 档高速快门与 MF 100% 放大对焦，清晰拍出月海与环形山地貌。",
+      "steps": [
+        {
+          "strong": "第一步：关闭矩阵测光，改用「点测光」",
+          "text": "按 <code>i</code> 键 ➜ 测光切换为【点测光】。夜空黑色占大半，矩阵测光会误判环境极暗而拉长曝光导致月亮过曝成白圆饼；点测光直接锁定月球本体亮度。"
+        },
+        {
+          "strong": "第二步：手动放大对焦（MF + 100% 局部放大）",
+          "text": "对焦模式切为 <code>MF</code>，按机身右下角放大键在翻转屏上将月球边缘环形山放大至 100%，转动对焦环至纹理最清晰锐利后锁焦。"
+        },
+        {
+          "strong": "第三步：脚架防震防位移",
+          "text": "长焦端月球在取景框中移动极快，快门绝不可过慢，配合上架关 VR 与 d3 延时 2 秒稳固拍摄。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（拉至最长焦端）",
+          "desc": "获得 APS-C 最大的放大倍率（等效 375mm 视角）"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动曝光）",
+          "desc": "排除黑夜环境光干扰，完全固定进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "250mm 端全开为 f/6.3，收至 f/8 是长焦端最佳锐度甜点"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/125s ~ 1/250s",
+          "desc": "长焦下月球相对位移快，慢于 1/30s 会产生运动模糊"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证月面细节纯净无噪点"
+        },
+        {
+          "key": "白平衡",
+          "val": "K 值设为 4500K~5000K 或日光",
+          "desc": "避免泛黄，呈现清透冷冽的月光质感"
+        }
+      ],
+      "pitfall": "上弦月与下弦月（半月/月牙）比满月更出片！满月是正面阳光直射反差平淡，弦月的明暗交界线处有大角度斜射阳光，环形山凹凸阴影立体感最强烈。"
+    },
+    {
+      "id": 4,
+      "idStr": "04",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 套头挑战星空——利用「间隔定时拍摄」录制璀璨星轨",
+      "summary": "套头虽只有 f/3.5 光圈，但在 16mm 广角端配合机身间隔定时连拍上百张并进行后期叠加，不仅弥补进光量，还能生成画质纯净的同心圆星轨。",
+      "steps": [
+        {
+          "strong": "第一步：精准星空手动对焦",
+          "text": "切 <code>MF</code>，找天空中最亮恒星，按放大键 100% 放大，缓慢微调对焦环直至星点聚成最小、最实心的针尖光点。"
+        },
+        {
+          "strong": "第二步：关闭长时间曝光降噪",
+          "text": "<code>MENU</code> ➜ <code>照片拍摄菜单</code> ➜ <code>长时间曝光降噪</code> ➜ 设为 <code>OFF</code>。若开启此项，每拍 20 秒就会额外花 20 秒降噪，星轨合成会出现断裂的“虚线”。"
+        },
+        {
+          "strong": "第三步：配置间隔定时拍摄",
+          "text": "<code>MENU</code> ➜ <code>间隔定时拍摄</code> ➜ 间隔时间设为【单张曝光时间 + 1~2秒】（如单张 20 秒则间隔设为 22 秒）；拍摄张数设为 100~150 张。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（拧到最广角）",
+          "desc": "获取最大天空视角（等效 24mm）与最大进光量（f/3.5）"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "保证上百张照片曝光参数绝对统一"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/3.5（全开光圈）",
+          "desc": "尽可能收集微弱夜空星光"
+        },
+        {
+          "key": "快门速度",
+          "val": "15s ~ 20s",
+          "desc": "符合 500 法则：500/(16*1.5)≈20.8s，单张星点不拖尾"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 800 ~ 1600",
+          "desc": "激发星光信号，同时避免 APS-C 暗部产生过多热噪"
+        },
+        {
+          "key": "白平衡",
+          "val": "手动色温 3800K ~ 4200K",
+          "desc": "消除城市远景光污染黄雾，呈现深邃纯净幽蓝夜空"
+        }
+      ],
+      "pitfall": "想拍同心圆星轨，必须将镜头朝向正北方对准北极星。拍完后使用免费软件 StarTrails 或 Photoshop【图层混合：变亮】一键堆栈合成。"
+    },
+    {
+      "id": 18,
+      "idStr": "18",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 拍出“巨型悬日”与地标剪影——等效 375mm 视角的空间压缩魔法",
+      "summary": "广角镜头拍出的太阳只是一个小点。利用 50-250mm 拧到 250mm 端（等效 375mm），人站在 2~3 公里开外，利用透视关系把太阳拍出吞没地标建筑的压倒性巨物感。",
+      "steps": [
+        {
+          "strong": "第一步：空间透视密码——“站得极远 + 250mm 焦段拉满”",
+          "text": "太阳在镜头里的角直径恒定不变（约 0.5 度）；若距离地标大桥有 2~3 公里远，建筑被缩小，而 250mm 长焦把它与太阳一起拉近，视觉上太阳便显得极其庞大。"
+        },
+        {
+          "strong": "第二步：严控高光，保住“太阳圆形轮廓”",
+          "text": "测光选【高光重点测光】或【点测光】，按住机顶 <code>+/-</code> 键向负向大幅下压 <code>-1.3 EV 至 -2.0 EV</code>，主动让地面建筑退化为锋利的纯黑剪影，确保太阳边缘清晰如蛋黄。"
+        },
+        {
+          "strong": "第三步：破除慢门惯性，使用 1/500s 以上高速快门",
+          "text": "长焦下地球自转带来的太阳视觉下沉速度极快（肉眼可见其下坠），快门慢于 1/60s 太阳边缘就会出现位移虚影，必须维持在 1/500s~1/1600s 才能定格清晰锐利的太阳边缘。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（拉至最长焦）",
+          "desc": "获得最大放大倍率与最极致的空间压缩"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）或 A 档（光圈优先）",
+          "desc": "严格锁定曝光与进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/11",
+          "desc": "250mm 最佳画质甜点区，确保建筑剪影与太阳轮廓锐利"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/500s ~ 1/1600s（随日落变暗调整）",
+          "desc": "冻结太阳下落位移与热浪边缘抖动"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证剪影纯黑无杂色彩噪"
+        },
+        {
+          "key": "白平衡",
+          "val": "K 值设为 6500K ~ 7500K 或阴影",
+          "desc": "强化日落沉沦时的浓郁红橙暖金晚霞氛围"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关闭 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝超长焦机身微震"
+        }
+      ],
+      "pitfall": "切防正午强光直射！本技巧仅限日落最后 15~20 分钟（太阳变成柔和红橙色、肉眼可直视时）拍摄。太阳仍白炽刺眼时严禁使用 250mm 长时间取景，避免长焦聚光烧伤相机传感器或损伤视力。"
+    },
+    {
+      "id": 21,
+      "idStr": "21",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 套头挑战银河核心——16mm f/3.5 暗夜长曝光与多张堆栈降噪实战",
+      "summary": "很多爱好者以为拍银河必须买上万元大光圈定焦。身处远离光污染的暗空区，利用 16-50mm 在 16mm f/3.5 端单张 15 秒曝光，连续拍摄 10~15 张后进行堆栈降噪，同样能清晰捕获银河核心云雾。",
+      "steps": [
+        {
+          "strong": "第一步：换算 APS-C 安全快门（严格控制在 15 秒）",
+          "text": "遵循 500 法则换算 500/(16*1.5)≈20.8s，建议设定为 <code>15 秒</code>，确保边缘星点绝对是实心圆点，绝不产生脱线拖尾。"
+        },
+        {
+          "strong": "第二步：MF 放大精准对焦亮星",
+          "text": "切 <code>MF</code>，在屏幕中找到天空中最亮恒星（如织女星或天狼星），按放大键放大至 100%，微调对焦环直至星点收缩至最小、最实心微点后锁死。"
+        },
+        {
+          "strong": "第三步：色温调至 3800K ~ 4000K",
+          "text": "手动压低 K 值强制赋予夜空清澈通透的深邃幽蓝，让银河核心的气态星云对比更加鲜明。"
+        },
+        {
+          "strong": "第四步：关闭降噪连续拍摄 10~15 张",
+          "text": "长时间曝光降噪设为 <code>OFF</code>，保持脚架不动连续拍摄 10~15 张相同照片用于后期抵消高感噪点。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（拧到最广角）",
+          "desc": "获得最大取景视场角与最大物理进光量（f/3.5）"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "固定每次曝光的进光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/3.5（全开光圈）",
+          "desc": "最大限度收集暗夜微弱星光"
+        },
+        {
+          "key": "快门速度",
+          "val": "15 秒",
+          "desc": "保证星点不拖尾的黄金临界值"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 3200（或 ISO 1600）",
+          "desc": "激发弱光信号，使银河气态尘埃肉眼可见"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关闭 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝微震导致星点发散变虚"
+        }
+      ],
+      "pitfall": "利用免费软件 Sequator 一键抵消噪点：将拍好的 10~15 张照片导入电脑免费软件 Sequator（Win）或 Starry Landscape Stacker（Mac），软件会自动对齐星点并计算平均值，抵消 80% 的高感噪点，画质纯净度瞬间媲美全画幅定焦。"
+    },
+    {
+      "id": 23,
+      "idStr": "23",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "both",
+      "lensDesc": "16-50mm / 50-250mm 通用",
+      "mountDesc": "三脚架",
+      "title": "雷暴与闪电捕获指南——夜间长曝守株待兔与 4K 超清机内抓帧双绝技",
+      "summary": "闪电持续仅千分之几秒，看到再按快门必落空。夜间用 16-50mm 配合间隔定时 5~8 秒长曝循环守株待兔；白天光线太亮无法慢门时，切换 Z30 4K 视频录制并在机内无损抓取 830 万像素精细照片。",
+      "steps": [
+        {
+          "strong": "绝技一：夜间长曝守株待兔法",
+          "text": "切 M 档，f/8~f/11，ISO 100，快门设为 5s~8s（太长背景城市会过曝发白）。开启间隔定时拍摄，间隔时间设为单张曝光+1秒，张数设为 100 张，相机自动一张接一张拍，静等闪电撞入画面。"
+        },
+        {
+          "strong": "绝技二：白天 4K 录像机内抓帧",
+          "text": "白天切视频模式，录制 4K UHD 30p 视频（快门设 1/500s 以上）。录完后在相机回放界面找到闪电绽放最饱满的一帧暂停，按 <code>i 键</code> ➜ 选择【保存当前帧】，直接生成 830 万像素无损精细 JPEG 照片！"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm（大范围雷暴）",
+          "desc": "50mm ~ 100mm（远距离特定雷云）"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "视频模式（4K 30p UHD）"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/11（抑制闪电主干过曝）",
+          "desc": "f/5.6 ~ f/8"
+        },
+        {
+          "key": "快门速度",
+          "val": "5s ~ 8s",
+          "desc": "1/500s ~ 1/1000s（定格每帧无拖影）"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "ISO 100 ~ 200"
+        },
+        {
+          "key": "白平衡",
+          "val": "4000K ~ 4500K（呈现深邃幽蓝雷云）",
+          "desc": "晴天（5500K）"
+        }
+      ],
+      "pitfall": "生命安全第一红线！金属三脚架与相机构成天然引雷针，严禁在开阔楼顶天台、山顶、水边或原野架设三脚架！最佳机位是在室内紧贴窗户向外拍摄（关掉室内灯消除玻璃倒影），或远离雷暴中心 10 公里外拍摄。"
+    },
+    {
+      "id": 24,
+      "idStr": "24",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 无赤道仪猎户座大星云（M42）拍摄——等效 375mm 短曝堆栈实战",
+      "summary": "猎户座大星云 M42 是全天最亮的发射星云（视面积约为满月两倍）。利用 250mm 端（等效 375mm）配合三脚架，使用 1.0~1.3 秒极速短曝光连拍数百张，通过免费深空软件堆栈，普通套头也能揭开粉紫色星云与梯形星团。",
+      "steps": [
+        {
+          "strong": "第一步：换算极限短曝光（锁死 1.0s ~ 1.3s）",
+          "text": "在 375mm 视场下，曝光超过 1.5 秒星点即拉丝椭圆化。设为 1.0s 或 1.3s，既能保持星点圆润针尖，又能收集有效星云光子。"
+        },
+        {
+          "strong": "第二步：MF 放大精准对焦亮星",
+          "text": "推至 250mm 最长焦，对准猎户腰带三星，按放大键 100% 放大，极轻微转动对焦环至星点最小最实心后锁焦。"
+        },
+        {
+          "strong": "第三步：间隔定时批量连拍",
+          "text": "关长时间曝光降噪，开启间隔定时拍摄，间隔设为 3 秒，连拍 150 张一组（约耗时 7~8 分钟）。"
+        },
+        {
+          "strong": "第四步：微调云台位移",
+          "text": "由于无赤道仪，拍摄 60~80 张后星云会漂向边缘；暂停连拍轻轻松开云台将 M42 重新居中，累计拍摄 300~500 张。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（长焦拉满）",
+          "desc": "获得最大放大比例（等效 375mm），特写星云核心"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "固定每次快门的进光参数"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/6.3（全开光圈）",
+          "desc": "最大限度收集深空微弱星光"
+        },
+        {
+          "key": "快门速度",
+          "val": "1.0s ~ 1.3s",
+          "desc": "保证长焦下星点绝对不产生拖尾变形"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 6400",
+          "desc": "激发弱光微小电信号，确保星云气态云雾显影"
+        },
+        {
+          "key": "白平衡",
+          "val": "色温设为 4200K ~ 4500K",
+          "desc": "呈现自然纯净的宇宙深空背景"
+        }
+      ],
+      "pitfall": "如何肉眼找到 M42：秋冬季节找到猎户座中间并排的“腰带三星”；在腰带正下方垂直悬挂着三颗稍暗的小星（猎户佩剑），佩剑中间那一颗肉眼看来是毛茸茸的微光，镜头对准它即是 M42。照片导入 DeepSkyStacker (DSS) 堆栈即可消除 ISO 6400 噪点。"
+    },
+    {
+      "id": 30,
+      "idStr": "30",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "both",
+      "lensDesc": "16-50mm 与 50-250mm 双镜头",
+      "mountDesc": "三脚架",
+      "title": "机内多重曝光（变亮模式）——将 250mm 巨型月亮与地标夜景合二为一的直出魔法",
+      "summary": "现实中巨月与地标重合难得一遇。利用 Z30 机内多重曝光与“变亮（Lighten）”模式，第一拍 250mm 拍满月，第二拍半透明实时预览对齐大桥地标长曝，机内直出梦幻大片。",
+      "steps": [
+        {
+          "strong": "第一步：配置「多重曝光」变亮模式",
+          "text": "<code>MENU</code> ➜ <code>多重曝光</code> ➜ 设为【开（单张照片）】；拍摄张数设为 2 张；叠加模式选【变亮（Lighten）】；保留所有曝光设为 ON。变亮模式下纯黑夜空叠加仍是纯黑，月亮无缝嵌入第二张夜景。"
+        },
+        {
+          "strong": "第二步：第 1 拍——250mm 拍月亮",
+          "text": "50-250mm 拧至 250mm 端，点测光，f/8，1/250s，ISO 100。把月亮构图在画面上方 1/3 偏角，为第二拍地标留出空间。"
+        },
+        {
+          "strong": "第三步：第 2 拍——半透明实时预览对齐地标",
+          "text": "拍完第一张后，屏幕上会浮现出月亮的半透明虚影！拧回 50mm（或换 16-50mm 广角），看着虚影转动云台把大桥主塔挪到月亮下方，设定长曝击发合成！"
+        }
+      ],
+      "params": [
+        {
+          "key": "第 1 拍",
+          "val": "250mm（月亮特写）",
+          "desc": "f/8 | 1/250s | ISO 100</td>\n                      <td>点测光，月亮置于上方偏角，背景纯黑"
+        },
+        {
+          "key": "第 2 拍",
+          "val": "50mm 或 16-24mm（大桥夜景）",
+          "desc": "f/8 | 8s~15s | ISO 100</td>\n                      <td>矩阵测光长曝，看半透明虚影调整地标位置"
+        },
+        {
+          "key": "合成结果",
+          "val": "机内自动生成",
+          "desc": "14-bit RAW 或 精细 JPEG</td>\n                      <td>变亮模式自动消除暗部边缘，浑然一体"
+        }
+      ],
+      "pitfall": "第一拍夜空必须是纯黑无云！若第一张天空有灰雾或光污染泛白，变亮模式会把这层灰白连同月亮一起盖到第二张的地标上。两张照片白平衡务必统一固定在 4200K~4500K 或晴天。"
+    },
+    {
+      "id": 34,
+      "idStr": "34",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架 / 手持",
+      "title": "50-250mm 捕捉“飞鸟掠日”与“飞机穿日”——等效 375mm 极速连拍与陷阱锁焦实战",
+      "summary": "客机或飞鸟横掠落日日轮的时间仅有 0.3~0.8 秒。面对逆光太阳自动对焦必然拉风箱，利用 250mm 端 MF 提前锁焦太阳边缘，配合 Z30 极限 11 张/秒极速连拍，稳稳捕获经典天象剪影。",
+      "steps": [
+        {
+          "strong": "第一步：必须手动“陷阱锁焦（MF）”",
+          "text": "将镜头推至 250mm 最长焦，切 <code>MF</code>，放大键 100% 放大太阳边缘调至最锐后锁死对焦环不再触碰。焦平面已定在无限远，任何穿过太阳的飞鸟瞬间撞入清晰景深中。"
+        },
+        {
+          "strong": "第二步：激活机身极限火力「高速连拍（延长）H+」",
+          "text": "按释放模式键选 <code>H+（11 张/秒）</code>。半秒内连击 5~6 张照片，完整记录飞鸟从接触日轮到飞出的轨迹。"
+        },
+        {
+          "strong": "第三步：极速快门（1/1600s ~ 1/2500s）冻结振翅",
+          "text": "切 S 档或 M 档，快门拉到 1/2000s，光圈收至 f/8~f/11，彻底定格鸟翼羽毛尖端和机翼轮廓。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（最长焦端）",
+          "desc": "最大放大倍率（等效 375mm），让太阳与剪影充满画框"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死快门速度与光圈，保证连拍每张曝光绝对一致"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8 ~ f/11",
+          "desc": "最佳画质甜点区，保证剪影边缘刀削般锐利"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/1600s ~ 1/2500s",
+          "desc": "彻底定格飞鸟拍翅瞬间的肌肉与羽毛轮廓"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100 ~ 200",
+          "desc": "原生低感，确保太阳周围天空过渡细腻无噪点"
+        },
+        {
+          "key": "白平衡",
+          "val": "阴天（Cloudy）或 6500K",
+          "desc": "强化日落沉沦时的浓郁红橙色调"
+        }
+      ],
+      "pitfall": "机位航道与鸟道预判：傍晚日落前 30 分钟，湿地水库是群鸟归巢的高峰期，成群飞鸟会低空横穿西天落日；靠近机场的街道可用航旅雷达软件查看降落航线。安全警示：仅限日落最后 15~20 分钟太阳呈柔和红橙色时拍摄，太阳刺眼发白时严禁用长焦对准取景！"
+    },
+    {
+      "id": 43,
+      "idStr": "43",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 蓝调月出（Moonrise）——单张直出“粉蓝暮色与地平线巨月”的天文风光奇观",
+      "summary": "深夜拍月亮光比巨大非死即白。在农历十四至十六，当东面满月跃出地平线恰逢西面太阳落山，天空呈现粉蓝维纳斯带，天地光比天然 1:1，单张 RAW 即可完美收录地标与巨月环形山！",
+      "steps": [
+        {
+          "strong": "第一步：天文光比奇迹——15 分钟窗口",
+          "text": "农历满月月出与日落同步。东面天幕处于维纳斯带（上粉红下暮蓝），地面被天光照亮，金橙色初升月与地面照度几乎相同，无需多重曝光单张即得。"
+        },
+        {
+          "strong": "第二步：250mm 极限远距吊取",
+          "text": "站在距地标数公里外的制高点，长焦空间压缩与低空透视错觉让刚出地平线的月球显得异常庞大，与地标紧紧相依。"
+        },
+        {
+          "strong": "第三步：M 档锁死 1/60s ~ 1/125s 快门",
+          "text": "虽在脚架上，但 375mm 视场下月球沿自转爬升极快，慢于 1/15s 边缘即拉扯虚影，锁定在 1/60s~1/125s 彻底定格月球位移。"
+        },
+        {
+          "strong": "第四步：MF 放大精准锁定",
+          "text": "放大键 100% 放大月面边缘手动调至最锐后锁死。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（最长焦端）",
+          "desc": "最大放大比例（等效 375mm），强化地月尺寸对比"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "避免暮光变化时相机自动测光波动"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "最佳解析力光圈，抑制长焦端色散"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/60s ~ 1/125s",
+          "desc": "定格月球爬升位移，确保环形山边缘刀削般锐利"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100 ~ 200",
+          "desc": "原生低感，保证粉蓝暮色天幕纯净如洗"
+        },
+        {
+          "key": "白平衡",
+          "val": "晴天（5500K）",
+          "desc": "忠实还原维纳斯带淡粉暮蓝，月亮呈现天然暖橙色"
+        }
+      ],
+      "pitfall": "极其严苛的 15 分钟黄金期：机会每月只有 1~2 天（农历十四或十五傍晚）。一旦太阳完全落山天色彻底变黑，月亮就会变成刺眼白光，地面沉入死黑，天然光比破灭。务必提前用软件查准月出时刻与方位角。"
+    },
+    {
+      "id": 50,
+      "idStr": "50",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 捕获月全食“红月亮（血月）”——暴跌 10 档暗天象下的长焦极限曝光法则",
+      "summary": "平时拍满月用 1/250s ISO 100；月全食食甚阶段月亮表面亮度断崖式暴跌 10~12 档！利用 250mm 端（等效 375mm）在 1.3 秒极限防拖尾快门下全开光圈并拉升高感，清晰定格古铜红月面与环形山。",
+      "steps": [
+        {
+          "strong": "第一步：极限快门红线——绝对不可超过 1.3 秒",
+          "text": "长焦超防拖尾公式 400/(250*1.5)≈1.06s。在 250mm 端快门绝不可慢于 1.3s~1.6s，否则月球边缘与环形山会发生严重运动拖尾位移发糊。"
+        },
+        {
+          "strong": "第二步：参数大换血（f/6.3 全开 + ISO 1600~3200）",
+          "text": "锁定 1.3s 快门后，光圈在 250mm 端全开至 f/6.3，感光度拉升至 ISO 1600~3200，刚好在防拖尾时间内把暗弱古铜红月亮完美显影！"
+        },
+        {
+          "strong": "第三步：MF 放大手动对焦",
+          "text": "血月极暗，AF 必然瘫痪。按放大键 100% 放大月球外轮廓，极其微细转动对焦环调至最锐后锁死。"
+        },
+        {
+          "strong": "第四步：固定「晴天/日光（5500K）」白平衡",
+          "text": "严禁用 Auto WB（自动白平衡会强行加蓝纠正把红月变脏灰黄）；固定日光真实还原地球大气瑞利散射的古铜红光辉。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（长焦拉满）",
+          "desc": "获得最大放大倍率（等效 375mm），框满暗红月盘"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "固定每一档进光量，避免暗天象误导自动曝光"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/6.3（光圈全开）",
+          "desc": "最大化物理通光孔径"
+        },
+        {
+          "key": "快门速度",
+          "val": "1.0s ~ 1.3s",
+          "desc": "375mm 等效焦距下星体不产生明显拖尾拉丝的物理红线"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 1600 ~ ISO 3200",
+          "desc": "补偿暴跌 10 档的光子信号，确保红月暗部阴影明亮显影"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "消除超长焦慢门微震"
+        }
+      ],
+      "pitfall": "初亏/偏食阶段（半明半暗）：月球亮部依然极亮（需 1/250s），暗部已微红。此时单张无法兼顾，可开启自动包围曝光（BKT，一张 1/250s、一张 1s）连拍合成；食甚全红阶段则全盘使用上述长焦高感短曝参数。"
+    },
+    {
+      "id": 52,
+      "idStr": "52",
+      "chap": "astronomy",
+      "category": "日月星空",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "50-250mm 纯脚架捕获深空明珠「昴星团（M45 七姐妹）」——等效 375mm 短曝堆栈璀璨蓝钻",
+      "summary": "金牛座昴星团（七姐妹星团）是秋冬夜空最耀眼的疏散星团。利用 250mm 端（等效 375mm）配合纯三脚架，锁定 1.0~1.3 秒极速短曝光连拍 200~300 张，DSS 堆栈消噪，无需赤道仪也能定格数十颗镶嵌在黑天鹅绒上的冰蓝宝石！",
+      "steps": [
+        {
+          "strong": "第一步：超长焦视场下的星团魅力",
+          "text": "M45 视直径接近满月 4 倍，在 250mm 端恰好饱满铺满大半画框，数十颗炽热年轻的蓝白恒星璀璨夺目。"
+        },
+        {
+          "strong": "第二步：守住“1 秒防拖尾红线”",
+          "text": "单张曝光严格控制在 <code>1.0s 至 1.3s</code>，确保恒星保持绝对滚圆如针尖，准确捕捉 B 型蓝白巨星的冷蓝光谱。"
+        },
+        {
+          "strong": "第三步：MF 放大精准对焦在昴宿六（最亮主星）",
+          "text": "切 <code>MF</code>，按放大键 100% 放大最亮主星（昴宿六 Alcyone），极细微转动对焦环至星点收缩为最小、最聚光的微型锐点后锁死。"
+        },
+        {
+          "strong": "第四步：机身间隔定时连拍 200~300 张",
+          "text": "关长时间曝光降噪，间隔设为 3 秒，连拍 150 张两组（静音拍摄 ON），拍摄中途微调云台将星团重新居中。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "250mm（最长焦端）",
+          "desc": "获得最大放大比例（等效 375mm），特写星团全貌"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死每次击发的进光参数"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/6.3（全开光圈）",
+          "desc": "收集夜空最微弱的光子信号"
+        },
+        {
+          "key": "快门速度",
+          "val": "1.0s ~ 1.3s",
+          "desc": "保证长焦下星点绝不拉丝椭圆化"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 3200 ~ ISO 6400",
+          "desc": "激发弱光微小电信号，确保暗弱伴星全部显影"
+        },
+        {
+          "key": "白平衡",
+          "val": "色温设为 4000K ~ 4300K",
+          "desc": "呈现自然纯黑宇宙背景，凸显星团清冽冰蓝冷光"
+        }
+      ],
+      "pitfall": "肉眼寻星秘笈：秋冬晴朗夜空先找到猎户座；顺着腰带三星向右上方延伸看到红色的金牛座毕宿五；再向右上方看一小段距离，一簇如同一小团淡蓝色碎雾的星群就是 M45！照片导入 DeepSkyStacker (DSS) 堆栈，彻底消除 ISO 3200 噪点，唤醒蓝宝石星芒！"
+    },
+    {
+      "id": 16,
+      "idStr": "16",
+      "chap": "water",
+      "category": "水景海滨",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 慢门水流拉丝——告别死白雾化，用 1/4s~1s 黄金快门拍出瀑布丝缕力量感",
+      "summary": "很多初学者以为慢门水流越长越好（动辄 20 秒），结果水流变成一团没有细节的死白雾。锁定 1/4s~1s 黄金快门速度，既能消除破碎水花，又能完美保留水流奔涌的丝状纤维肌理。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 1/4s ~ 1s 黄金水流动态快门",
+          "text": "高速快门（1/500s）冻结水花显杂乱，数十秒长曝水流彻底雾化失去动势；而 1/4 秒至 1 秒恰好消除水花破碎感，保留条理分明的丝缕拉丝质感。"
+        },
+        {
+          "strong": "第二步：S 档控速与扩展低感（Lo 1.0）压进光",
+          "text": "切 <code>S 档</code>，快门设为 <code>0.5s（1/2秒）</code>，光圈收至 f/11~f/14。若光线偏亮，进入 ISO 设置切换为 <code>Lo 0.7</code> 或 <code>Lo 1.0</code>（等效 ISO 50）进一步压制白天进光量。"
+        },
+        {
+          "strong": "第三步：焦点必须锁在静止岩石上",
+          "text": "流动水面反差变化剧烈，对焦必拉风箱。务必使用单点对焦把焦点对准【水流旁边浸润、静止的深色岩石或枯木】，以坚硬静止的岩石反衬流动柔美的水丝。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm（近景）/ 35mm ~ 50mm（瀑布局部）",
+          "desc": "广角突出由远及近的水流走势；中焦提炼落差局部"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "S 档（快门优先）或 M 档",
+          "desc": "严密控制快门处于拉丝区间"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/4s ~ 1s（急湍用 1/4s，缓流用 1s）",
+          "desc": "呈现最具视觉张力的水丝纹理"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11 ~ f/14",
+          "desc": "保证充足景深，避免缩到 f/22 产生光学衍射"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100（或 Lo 1.0）",
+          "desc": "降低感光度，辅助压制白天快门速度"
+        },
+        {
+          "key": "曝光补偿",
+          "val": "-0.3 EV 至 -0.7 EV",
+          "desc": "白色水花极易过曝，主动微降曝光保留水丝明暗渐变"
+        }
+      ],
+      "pitfall": "三脚架落脚防滑：在潮湿溪滩或青苔岩石架设脚架时，务必将脚钉用力卡入泥沙或岩石缝隙中，严防流水冲刷脚架引起不易察觉的周期性微晃导致全图模糊。"
+    },
+    {
+      "id": 26,
+      "idStr": "26",
+      "chap": "water",
+      "category": "水景海滨",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 海滨日落慢门——2s~5s 浪花如烟雾化与湿沙镜面倒影实战",
+      "summary": "海浪拍打礁石若用高速快门易显破碎凌乱。在日落黄金时刻锁定 2s~5s 慢门，能将浪花抚平为缭绕仙气薄雾，同时利用退潮后的湿沙镜面倒映整片晚霞。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 2s ~ 5s 半雾化黄金快门",
+          "text": "1/2 秒是浪花拉丝水线，30 秒是完全平静死镜；而 2 秒至 5 秒恰好把拍打在黑色礁石上的白色浪花抚平为轻烟薄雾，海水依然保留起伏体量感。"
+        },
+        {
+          "strong": "第二步：低机位捕获“湿沙镜面倒影”",
+          "text": "海浪退去瞬间沙滩留有一层水膜。三脚架降至贴沙滩 20~30 厘米，翻转屏 90 度俯视，画面下半部留给反射天光的湿润沙滩，中间安排一块黑色海蚀礁石。"
+        },
+        {
+          "strong": "第三步：高光重点测光 + 暖调色温",
+          "text": "测光选【高光重点测光】保住晚霞高光不溢出；白平衡设为 <code>6500K~7200K</code>，令海面泛起浓郁金红暖调。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm（最广角）",
+          "desc": "纳海天一色，强化近景湿沙倒影与礁石纵深张力"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档或 S 档",
+          "desc": "精准将快门时间锁定在雾化区间"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11",
+          "desc": "解析力与大景深黄金平衡，同时压低进光换取慢门"
+        },
+        {
+          "key": "快门速度",
+          "val": "2s ~ 5s（视日落天色暗度微调）",
+          "desc": "拍出礁石边缘如烟雾缭绕的梦幻浪花"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100（或 Lo 1.0）",
+          "desc": "锁死纯净画质，辅助压慢快门"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-S 单点对准海水冲刷不到的干燥礁石边缘合焦",
+          "desc": "确保对焦稳固不拉风箱"
+        }
+      ],
+      "pitfall": "极其关键的“淡水冲洗保养”：海水与海风含高浓度腐蚀性盐分。拍摄结束回家后，务必将泡过海水的脚架管节全部拆开用自来水彻底冲洗干净并晾干，否则金属螺丝与旋钮两周内会严重氧化卡死；相机用微湿纯净水棉布擦拭表面盐雾。"
+    },
+    {
+      "id": 42,
+      "idStr": "42",
+      "chap": "water",
+      "category": "水景海滨",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "三脚架 / 手持",
+      "title": "50-250mm 日落“金色波光”微慢门——1/15s~1/60s 拍出莫奈油画般的流金水波",
+      "summary": "高速快门拍水波僵硬碎乱，超长慢门水面被抹平失去金光跳跃。锁定 1/15s~1/60s 微慢门，水波立体起伏保留的同时反光微拉丝成金色笔触，呈现莫奈印象派油画般的流金质感。",
+      "steps": [
+        {
+          "strong": "第一步：理解微慢门（1/15s ~ 1/60s）的光学质感",
+          "text": "水波起伏的阴影依然健在，而波浪尖端反射的耀眼夕阳被横向拉伸延展，融化成一抹抹浓墨重彩的金色光条。"
+        },
+        {
+          "strong": "第二步：长焦空间压缩“密植金鳞”",
+          "text": "用 100~200mm 端（等效 150~300mm）顺着落日反光带远摄，长焦把数百米江面起伏波浪紧密叠压在一起，画框内全是密集翻涌的金色鱼鳞波纹。"
+        },
+        {
+          "strong": "第三步：S 档控速 + 高光重点测光",
+          "text": "S 档将快门固定在 1/30s，测光选【高光重点测光】或负补偿 -0.7EV，确保金波反射核心呈现纯正深金黄，坚决不发白溢出。"
+        },
+        {
+          "strong": "第四步：落日流金调色",
+          "text": "白平衡选阴天或输入 6500K~7000K；优化校准选【鲜艳 Vivid】微调对比度+0.5、饱和度+1.0。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "100mm ~ 200mm（等效 150mm~300mm）",
+          "desc": "剔除两岸无关杂景，紧紧框取被落日染成金色的核心水域"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "S 档（快门优先）",
+          "desc": "锁死快门速度在微慢门拉丝区间"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/15s ~ 1/50s（以 1/30s 为基准）",
+          "desc": "既保留水波立体阴影，又让反光微拉丝成油画笔触"
+        },
+        {
+          "key": "光圈选择",
+          "val": "相机自动匹配（通常处于 f/8 ~ f/11）",
+          "desc": "保证长焦全画幅水波解析力极高"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "锁死原生低感，确保金色高光到水面暗部过渡极度细腻"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR / 手持开 VR（手持建议 1/30s）",
+          "desc": "彻底杜绝拍摄者自身抖动"
+        }
+      ],
+      "pitfall": "正对日落反光带轴线：夕阳直射水面会铺设出一条直奔镜头的金色反光带。身体移动脚步，让自己站在正对落日与光柱的中心轴线上；耐心等待一艘驶过的驳船或飞过水面的野鸭进入金光中，画龙点睛。"
+    },
+    {
+      "id": 46,
+      "idStr": "46",
+      "chap": "water",
+      "category": "水景海滨",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 极简艺术海景——1:1 方形画幅与 30 秒长曝光，打造肯纳式留白大片",
+      "summary": "享誉画廊的极简长曝光艺术风光。开启 Z30 内置的 1:1 方形画幅，在日落余晖散尽的蓝调尾声进行 30 秒慢门，海水与天空彻底熨平成丝滑灰度，海中孤桩孤石散发禅意深邃美感。",
+      "steps": [
+        {
+          "strong": "第一步：切换「1:1 方形画幅」",
+          "text": "<code>MENU</code> ➜ <code>选择图像区域</code> ➜ 切换为 <code>1:1（16×16）</code>。方形构图消除了左右方向偏向，将所有视觉力量死死凝聚在画面中心，天然散发画廊艺术肃穆气质。"
+        },
+        {
+          "strong": "第二步：日落后微光窗口拉长快门至 20s ~ 30s",
+          "text": "日落后 25~45 分钟自然光衰减，切 M 档，f/11，ISO 100（或 Lo 1.0），快门自然达到 20~30 秒，海面起伏彻底被熨平成虚无画布。"
+        },
+        {
+          "strong": "第三步：寻找“海中孤独锚点”",
+          "text": "海中单根防波木桩、废弃栈桥石柱、或潮水浸泡的一块海蚀孤石，置于方形画框正中心或下三分之一处。"
+        },
+        {
+          "strong": "第四步：微调单色优化校准",
+          "text": "单色模式下对比度降至 <code>-1.0</code>（让天空与海水呈现丝滑细腻灰度过渡，杜绝生硬断层），中音调锐化设为 +1.5（木桩木纹干裂锋利如刀刻）。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 28mm",
+          "desc": "广角纳入辽阔虚无天海，凸显孤独主体的渺小与坚定"
+        },
+        {
+          "key": "画幅比例",
+          "val": "1:1（方形）",
+          "desc": "剔除左右杂乱边缘，将视觉焦点绝对中心化"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死快门速度与曝光量"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/11",
+          "desc": "最佳解析力，确保主体边缘针尖般锐利"
+        },
+        {
+          "key": "快门速度",
+          "val": "20s ~ 30s",
+          "desc": "将海水彻底抚平为如烟如镜的虚化状态"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100（或 Lo 1.0）",
+          "desc": "保证天空大面积留白区域纯净无噪点"
+        },
+        {
+          "key": "防抖设置",
+          "val": "上架关 VR + 开启 d3 延时 2 秒",
+          "desc": "杜绝超长慢门机身微颤"
+        }
+      ],
+      "pitfall": "海水“半淹状态”意境最高：最完美的拍摄时机是海水刚刚涨潮没过木桩或石块根部的时候，木桩仿佛从虚无的水面上悬浮生长出来，没有杂乱泥沙干扰，禅意最浓。"
+    },
+    {
+      "id": 5,
+      "idStr": "05",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 街头扫街——翻转屏“腰平盲拍”与高反差黑白直出",
+      "summary": "16-50mm 收缩后如饼干头般便携。利用 Z30 翻转屏 90° 向上翻折进行腰平取景，彻底消除举机侵略感，配合高反差单色直出人文大片。",
+      "steps": [
+        {
+          "strong": "第一步：翻转屏 90° 腰平取景 + 触控快门",
+          "text": "将屏幕向上折起 90 度，双手持机在腰腹部俯视屏幕，在旁人眼中你只是在检查设置。开启屏幕左侧触控快门，轻点画面瞬间完成对焦合焦击发。"
+        },
+        {
+          "strong": "第二步：锁定街头防糊安全快门",
+          "text": "<code>MENU</code> ➜ <code>ISO 感光度设置</code> ➜ 开启【ISO 感光度自动控制】，最小快门速度设为 <code>1/250s</code>，最大感光度设为 <code>ISO 3200</code>。"
+        },
+        {
+          "strong": "第三步：定制黑白单色（Monochrome）影调",
+          "text": "按 <code>i</code> 键 ➜ 优化校准选【单色】➜ 滤镜效果选【红（Red）】或【黄（Yellow）】强化光影反差；中音调锐化设为 +1.5，清晰度设为 +1.0。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "24mm ~ 35mm（等效 35mm~50mm）",
+          "desc": "经典人文纪实视角，透视自然平实"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "快速控制景深"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/8",
+          "desc": "保证充足的景深容错率，行进步态不脱焦"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-C 连续伺服 + 广域（L-人物）",
+          "desc": "镜头自动咬合走动行人的面部与眼部"
+        },
+        {
+          "key": "快门设置",
+          "val": "Auto ISO 最小快门锁定 1/250s",
+          "desc": "消除路人行走时的动态肢体拖影"
+        },
+        {
+          "key": "防抖开关",
+          "val": "VR 减震开启（ON）",
+          "desc": "手持抓拍必备，配合 4.5 档防抖稳如磐石"
+        }
+      ],
+      "pitfall": "16-50mm 采用沉割式机械锁止设计，出门扫街前务必将变焦环提前拧开至工作状态，避免突发精彩瞬间时屏幕弹出“请旋转镜头”提示而错失良机。"
+    },
+    {
+      "id": 8,
+      "idStr": "08",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "50-250mm 街头人文——用 70-135mm 等效焦段实现“无感远摄”与背景净化",
+      "summary": "人多背景杂时，换上长焦站在街道对侧或数米开外。利用 50-85mm（等效 75-130mm 经典人像焦段）在不打扰被摄者的前提下，以浅景深把主体从嘈杂环境中剥离出来。",
+      "steps": [
+        {
+          "strong": "第一步：锁定 50mm ~ 85mm 抓拍焦段",
+          "text": "此区间光圈处于 f/4.5~f/5.3，相比 250mm 超长焦更灵活、畸变小，且物理长焦距足以柔化背景广告牌与过往车辆。"
+        },
+        {
+          "strong": "第二步：启用「AF-C + 人物眼部侦测」",
+          "text": "按 <code>i</code> 键 ➜ AF 区域模式设为【广域（L-人物）】或【自动区域（人物）】，镜头持续死咬行人眼部，抓拍合焦率极高。"
+        },
+        {
+          "strong": "第三步：锁定安全快门（1/320s 以上）",
+          "text": "<code>MENU</code> ➜ <code>ISO 感光度设置</code> ➜ 开启 ISO 自动控制，最小快门速度设为 <code>1/320s</code> 或 <code>1/500s</code>。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "50mm ~ 85mm（等效 75mm~130mm）",
+          "desc": "经典中焦人像视角，主体突出且透视极其自然"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定最大可用光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/4.5 ~ f/5.3（光圈全开）",
+          "desc": "获取最大进光量与最强烈的背景虚化分离感"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-C 连续伺服 + 人物眼部识别",
+          "desc": "持续追踪迎面或侧向行走的被摄者"
+        },
+        {
+          "key": "防抖设置",
+          "val": "VR 减震开启（ON）",
+          "desc": "手持长焦拍摄务必保持光学防抖开启"
+        },
+        {
+          "key": "优化校准",
+          "val": "自然（Neutral）微调对比度-0.5",
+          "desc": "防止强光下人脸阴影死黑，肤色过渡柔润"
+        }
+      ],
+      "pitfall": "寻找“前景虚化遮挡”（窥视感构图）：站在路边树木、橱窗玻璃或路灯后，将镜头贴近遮挡物边缘拍摄，把前景融化成大面积柔焦色块，为街头抓拍增添电影般的空间层次感。"
+    },
+    {
+      "id": 17,
+      "idStr": "17",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 雨夜霓虹与倒影——低机位翻转屏贴水取景与电影感冷暖调优",
+      "summary": "雨水浸润的柏油路是高反射率沥青镜面。利用翻转屏 90° 向上翻折将相机降至离积水 3~5 厘米处，无需趴在地上即可拍出倒映霓虹流光的王家卫式电影感街拍。",
+      "steps": [
+        {
+          "strong": "第一步：翻转屏 90° 贴水 3~5 厘米取景",
+          "text": "寻找路边平整积水，屏幕向上翻折，身体微蹲将相机降至离水面 3~5 厘米。画面下半部是虚幻倒影，上半部是真实街景与撑伞路人，形成镜面双重空间。"
+        },
+        {
+          "strong": "第二步：负向曝光补偿（-0.7 EV 至 -1.0 EV）压死暗部",
+          "text": "雨夜若让相机自动测光，相机会试图提亮漆黑路面导致 ISO 飙升至 6400 产生严重彩噪；主动下压曝光把暗部压沉为纯黑，将 ISO 压回 1600 以内，霓虹倒影更加鲜艳浓郁。"
+        },
+        {
+          "strong": "第三步：白平衡微调偏移（冷青与暖红对撞色）",
+          "text": "按 <code>i</code> 键 ➜ 白平衡选 <code>K</code> 调至 <code>3800K</code> ➜ 坐标微调向 <code>B（偏蓝 +1.0）</code> 与 <code>M（偏洋红 +1.5）</code> 偏移；路面呈深邃紫蓝调，与车尾刹车灯暖红形成强烈冷暖对撞。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm",
+          "desc": "广角同时容纳近处水面与上方行进的人物全身"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定最大光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/3.5 ~ f/4（全开）",
+          "desc": "收集夜间微弱光线，避免快门过慢"
+        },
+        {
+          "key": "快门与防抖",
+          "val": "手持开启 VR 减震 + 快门 1/60s ~ 1/125s",
+          "desc": "凝固撑伞路人步态，同时防手抖"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（上限设为 ISO 3200）",
+          "desc": "配合负补偿，实际 ISO 稳定在 800~1600 纯净区间"
+        },
+        {
+          "key": "对焦方式",
+          "val": "触控快门点选水面倒影或伞尖",
+          "desc": "点选高光反光处瞬间完成对焦击发"
+        },
+        {
+          "key": "优化校准",
+          "val": "创意优化校准：漂白（Bleach Bypass）",
+          "desc": "自带低饱和、高反差的胶片电影感，极契合潮湿夜景"
+        }
+      ],
+      "pitfall": "机身防水防滴防溅：Z30 并非全天候三防机身，雨天拍摄可用透明雨伞遮挡，或在镜头卡口处套上保鲜袋开孔露出镜头前端，切防大雨滴直接溅入顶部麦克风拾音孔与接口仓。"
+    },
+    {
+      "id": 20,
+      "idStr": "20",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 街头慢门摇摄（Panning）——捕获飞驰的骑行与车流，拍出主体清晰背景拉丝的速度感大片",
+      "summary": "高速快门拍运动物体呆板如模型。利用 16-50mm 配合 1/20s~1/30s 慢门平摇跟随运动主体，身体随动击发，让主体清晰定格，周围背景全部化为强烈的水平速度流线。",
+      "steps": [
+        {
+          "strong": "第一步：S 档（快门优先）锁定 1/20s ~ 1/30s",
+          "text": "滑板/奔跑用 1/15s，穿行单车/电瓶车用 1/20s~1/30s，快速汽车用 1/40s~1/60s。"
+        },
+        {
+          "strong": "第二步：设置「AF-C + 广域（L-人物/车辆）」",
+          "text": "按 <code>i</code> 键设置，当目标从画面侧方进入视线时半按快门死死咬住，镜头紧随其移动开始平移。"
+        },
+        {
+          "strong": "第三步：身体机械力学——“以腰为轴，匀速随动，动作随贯（Follow-through）”",
+          "text": "双臂夹紧胸侧，切忌仅用手臂挥舞，必须用腰部带动上半身水平转动。在主体行进至正前方瞬间按下快门连拍，击发后不要急刹车，顺着惯性继续平滑旋转半秒，杜绝纵向颠簸。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "28mm ~ 35mm（等效 42mm~50mm）",
+          "desc": "自然透视，拉丝线条舒展且不易脱焦"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "S 档（快门优先）",
+          "desc": "锁死快门速度为拉丝基准"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/20s ~ 1/30s",
+          "desc": "流线动感与主体清晰度的黄金平衡点"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "日间强光下压低感光度，防止小快门导致光圈过缩"
+        },
+        {
+          "key": "释放模式",
+          "val": "高速连拍（H）",
+          "desc": "每次平摇连拍 4~6 张，从中挑选主体最锐利的一张"
+        },
+        {
+          "key": "防抖设置",
+          "val": "VR 减震开启（NORMAL）",
+          "desc": "尼康 VR 智能识别单向平摇运动，专门补偿纵向手抖"
+        }
+      ],
+      "pitfall": "选择背景有复杂点光源或纵深建筑的街道：摇摄依赖背景拉丝，若背景是一堵平整无细节的白墙，拉丝效果微乎其微；选择背景有绿化带树影、斑马线、招牌灯箱或建筑窗格的街道，拉丝线条最丰富华丽。"
+    },
+    {
+      "id": 28,
+      "idStr": "28",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "50-250mm 傍晚“发丝金边（轮廓光）”抓拍——等效 85-135mm 逆光人文与暖光直出",
+      "summary": "日落前 30~45 分钟低角度逆光射向街头。利用 50-90mm 端（等效 75-135mm 黄金人像焦段）寻找背阴深色背景，行人的发丝与肩膀瞬间被镀上一道璀璨的金色光边。",
+      "steps": [
+        {
+          "strong": "第一步：构图核心——逆光主体 + 深色背阴背景",
+          "text": "寻找背阴大楼、深色桥洞或浓密林荫道作为背景，让斜后方的夕阳把人物发丝勾勒出金色高光细线，从暗背景中凸显出来。"
+        },
+        {
+          "strong": "第二步：正向曝光补偿（+0.7 EV 至 +1.3 EV）告别黑脸",
+          "text": "逆光下背景光线强，矩阵测光会把人脸拍黑；主动提升曝光补偿，确保人物面部白皙通透，营造温暖日系空气感。"
+        },
+        {
+          "strong": "第三步：半遮挡防眩光雾化",
+          "text": "50-250mm 务必装上遮光罩。稍微移动脚步让夕阳被路灯杆、树梢或屋檐挡住，只留漫射金光，画面反差与色彩最高。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "50mm ~ 90mm（等效 75mm~135mm）",
+          "desc": "人像黄金焦段，透视扁平端正，不打扰被摄者"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定最大光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/4.5 ~ f/5.3（全开）",
+          "desc": "获取最大进光量，配合中焦营造自然背景虚化"
+        },
+        {
+          "key": "快门速度",
+          "val": "保持在 1/320s 以上",
+          "desc": "行人运动中，快门过慢发丝金边会产生运动模糊"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-C + 广域（L-人物眼部追踪）",
+          "desc": "逆光下强光可能干扰焦点，眼部侦测紧咬人脸"
+        },
+        {
+          "key": "白平衡",
+          "val": "晴天微调：A（琥珀+1.5）与 M（洋红+0.5）",
+          "desc": "渲染夕阳醇厚温暖金调"
+        }
+      ],
+      "pitfall": "若太阳在画面中央导致逆光拉风箱，可用左手在镜头上方临时充当“手掌遮光罩”挡住直射强光，半按快门咬合焦点后再移开手掌击发快门。"
+    },
+    {
+      "id": 33,
+      "idStr": "33",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 街头光影舞台——利用高楼“一隙窄光”与点测光，拍出戏剧性极简剪影",
+      "summary": "以光为笔，以暗为幕。当阳光穿透高楼狭缝在阴暗街道投射出一道窄光通道时，用点测光对准光斑并主动压暗，未受光的杂乱背景全部隐入深沉纯黑，路人走过如同舞台上的独行主角。",
+      "steps": [
+        {
+          "strong": "第一步：寻找城市“聚光灯舞台”",
+          "text": "晴天上午或午后斜射光下，寻找高楼之间或高架桥下狭缝投射出的一道 1~2 米宽的明亮光带，周围大部分街区处于深邃阴影中。"
+        },
+        {
+          "strong": "第二步：点测光直对光斑 + 负补偿 -1.0 EV",
+          "text": "点测光框精准对准地表光斑中央，按住 <code>+/-</code> 键向负向调节 -0.7EV 至 -1.0EV，彻底压死周围阴影负空间。"
+        },
+        {
+          "strong": "第三步：“陷阱预对焦”守株待兔",
+          "text": "提前将单点对焦点放在光斑照射的地砖刻线上，半按快门合焦后切至 <code>MF</code> 锁死焦平面，静候行人迈步走入光束瞬间果断击发。"
+        },
+        {
+          "strong": "第四步：优化校准单色红滤镜",
+          "text": "单色模式下红滤镜配合对比度拉满 +2.0，明暗反差如版画般震撼。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "28mm ~ 50mm（等效 42mm~75mm）",
+          "desc": "裁切多余边缘杂景，将画框限制在光斑与暗影交界处"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档或 M 档",
+          "desc": "严控曝光与景深"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/8",
+          "desc": "保证光斑内地面与人物拥有充足景深清晰度"
+        },
+        {
+          "key": "快门速度",
+          "val": "自动（通常 1/500s 以上）",
+          "desc": "光斑内光线强，高速快门轻松定格迈步瞬间绝无拖影"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生低感，保证深沉暗部极度纯净深邃"
+        },
+        {
+          "key": "释放模式",
+          "val": "高速连拍（H）",
+          "desc": "行人踏入光束瞬间连拍 3~5 张，挑选姿态最舒展的一张"
+        }
+      ],
+      "pitfall": "抓取舒展的“剪刀步”姿态：在人物迈开双腿呈“剪刀步”、手臂前后摆动的瞬间按下快门，剪影轮廓最修长生动；双腿并拢站立剪影会缩成一根笨拙的柱子失去动感。"
+    },
+    {
+      "id": 36,
+      "idStr": "36",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 手持夜景扫街——压榨 4.5 档 VR 防抖与“借光测光”控噪实战",
+      "summary": "手持夜景不必非得大光圈。压榨 16-50mm 强悍的 4.5 档 VR 光学防抖，广角端手持稳压 1/10s~1/15s 慢门，配合机身高感降噪设为【弱】与街头借光法，手持也能直出纯净夜市人文。",
+      "steps": [
+        {
+          "strong": "第一步：压榨 4.5 档 VR 极限（16mm 挑战 1/10s）",
+          "text": "在 16mm 广角端借助 VR 防抖，安全快门下探至 1/15s~1/10s，相比 1/60s 曝光延长了 2 档，直接把 ISO 3200 压低至 ISO 800，画质纯净度翻倍。"
+        },
+        {
+          "strong": "第二步：修改「高感光度降噪」为【弱（Low）】",
+          "text": "默认的“标准”降噪会把皮肤和石材纹理暴力抹平呈塑料感；切为“弱”后保留细腻均一的胶片微颗粒，细节锋芒毕露。"
+        },
+        {
+          "strong": "第三步：街头借光法",
+          "text": "寻找发光的自动售货机、24小时便利店明亮橱窗、居酒屋暖帘作为天然大号柔光箱，等待路人走到光源旁顺光/侧光瞬间按下快门。"
+        },
+        {
+          "strong": "第四步：主动负补偿 -0.7 EV",
+          "text": "压暗暗部柏油路，消除暗部噪点，保护霓虹高光不过曝。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 24mm",
+          "desc": "广角端进光量最大（f/3.5~f/4），防抖容错率最高"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "S 档（快门优先）或 M 档",
+          "desc": "手持夜拍严禁 A 档（A 档易算错快门导致手抖）"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/15s ~ 1/30s",
+          "desc": "兼顾 VR 防抖极限与路人微动清晰度"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/3.5 ~ f/4（全开）",
+          "desc": "收集夜间可用光线"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（上限锁死在 ISO 3200）",
+          "desc": "配合借光与负补偿，实际 ISO 多处于 800~1600 纯净区"
+        },
+        {
+          "key": "防抖设置",
+          "val": "VR 减震开启（ON）",
+          "desc": "必须开启镜头防抖"
+        }
+      ],
+      "pitfall": "手持铁手姿态：双手握紧相机，双肘紧紧压在两肋胸壁上形成稳固三角支撑。在轻按快门前半秒，缓缓呼出半口气并轻轻屏住呼吸，手指腹柔和微压触碰快门，切忌猛按导致机身右倾。"
+    },
+    {
+      "id": 39,
+      "idStr": "39",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 雨窗水滴与霓虹光斑——对焦玻璃水珠的“虚实交织”电影感直出",
+      "summary": "阴雨天坐在咖啡馆窗边，挂满水滴的玻璃窗本身就是绝佳滤镜。16-50mm 逼近最近对焦极限将焦点锁在玻璃水珠上，窗外街道红绿灯彻底融化为弥散光斑，直出王家卫式氛围感大作。",
+      "steps": [
+        {
+          "strong": "第一步：打破对焦障碍——必须 MF 手动放大对焦",
+          "text": "透明水珠反差极小，自动对焦必然穿透玻璃对到窗外或拉风箱。切 <code>MF</code>，按放大键 100% 放大某一颗饱满圆润的水珠边缘和高光倒影调至最锐后锁死。"
+        },
+        {
+          "strong": "第二步：逼近镜头最近对焦距离（25~30 厘米）",
+          "text": "变焦至 35-50mm 端，镜头离玻璃保持 25~30 厘米。物距越短景深越浅，贴脸水珠颗颗分明，窗外车灯招牌融化成圆润柔和的弥散大光斑（Bokeh）。"
+        },
+        {
+          "strong": "第三步：开启「峰值对焦（d10）」",
+          "text": "轮廓增强显示设为 ON，合焦的水珠边缘亮起鲜明红色描边，清晰确认焦平面紧贴玻璃。"
+        },
+        {
+          "strong": "第四步：电影感调色",
+          "text": "白平衡设 4000K~4400K 赋予清冽幽蓝基调；优化校准选【自然】微调清晰度+1.5、对比度+0.5，或直接选创意预设【漂白】。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "35mm ~ 50mm",
+          "desc": "较长焦段配合近距离，能最大化放大背景光斑"
+        },
+        {
+          "key": "拍摄距离",
+          "val": "距玻璃窗约 25cm ~ 30cm",
+          "desc": "逼近镜头最近对焦极限"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/6.3（光圈全开）",
+          "desc": "收集光线，让背景光斑保持最圆润的柔焦弥散"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（上限设为 ISO 1600）",
+          "desc": "快门维持在 1/60s 左右防手抖"
+        },
+        {
+          "key": "防抖设置",
+          "val": "手持开启 VR 减震（ON）",
+          "desc": "抵消近摄状态下手持的微小晃动"
+        },
+        {
+          "key": "曝光补偿",
+          "val": "-0.3 EV 至 -0.7 EV",
+          "desc": "压暗暗部，保护窗外霓虹高光色泽不被冲淡"
+        }
+      ],
+      "pitfall": "窗外背景必须有“强点光源”：不要对着黑漆漆无光的深巷拍摄。最佳机位是咖啡馆面对红绿灯十字路口或繁华商铺霓虹灯箱的靠窗位，背景红黄白光斑化为天然斑斓油画幕布。"
+    },
+    {
+      "id": 44,
+      "idStr": "44",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "16-50mm 森山大道风黑白盲拍——化高感噪点为胶片粗颗粒，释放街头原始张力",
+      "summary": "黑白摄影中彩色杂点消失，高感噪点化为银盐胶片质感。利用 16-50mm 彻底关闭降噪、拉满反差与红滤镜，在腰间区域超焦距盲拍，直出森山大道“粗颗粒、晃动、失焦”的暗黑街头美学。",
+      "steps": [
+        {
+          "strong": "第一步：彻底关闭「高感光度降噪」",
+          "text": "<code>MENU</code> ➜ <code>高感光度降噪</code> ➜ 设为 <code>OFF</code>。拒绝机内算法将噪点涂抹成塑料油画，让每一颗高感像素颗粒呈现 Tri-X 400 胶片增感冲洗般的针尖硬质感。"
+        },
+        {
+          "strong": "第二步：优化校准“红滤镜 + 反差拉满”",
+          "text": "单色模式下滤镜效果选【红（Red）】，对比度直接拉满至 <code>+3.0</code>，锐化与清晰度设为 <code>+2.0</code>。亮部纯白、暗部深黑，展现刀刻版画反差。"
+        },
+        {
+          "strong": "第三步：主动拥抱高感（ISO 3200 ~ 6400）",
+          "text": "保证夜晚拥有 1/250s 以上快门，同时制造致密均一的硬朗颗粒。"
+        },
+        {
+          "strong": "第四步：区域预对焦（超焦距盲拍）",
+          "text": "18-24mm 焦段，光圈 f/5.6~f/8，MF 预设在身体正前方 1.5 米~2 米处锁死。双手持机垂在腰间，擦肩而过的瞬间凭直觉果断按下快门，完全无需看屏幕！"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "18mm ~ 24mm（等效 28mm~35mm）",
+          "desc": "经典纪实抓拍视角，兼顾主体与环境张力"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档 或 S 档",
+          "desc": "锁死快门速度与噪点质感"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/8",
+          "desc": "提供大景深容错率，确保近处到中景全部清晰"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/250s ~ 1/500s",
+          "desc": "盲拍时自己与行人都在走动，高速快门确保不手抖"
+        },
+        {
+          "key": "感光度",
+          "val": "固定 ISO 3200 ~ 6400",
+          "desc": "刻意制造致密均一的硬朗胶片粗颗粒"
+        },
+        {
+          "key": "高感降噪",
+          "val": "OFF（彻底关闭）",
+          "desc": "拒绝机内算法涂抹，保留原始质感"
+        }
+      ],
+      "pitfall": "破除“构图端正”执念：森山大道的精髓在于直觉与偶发性。倾斜的画框、被裁切掉半边的行人背影、切入画面的斑马线，更能传达都市丛林极度真实的压迫感与瞬间悸动。"
+    },
+    {
+      "id": 45,
+      "idStr": "45",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持抓拍",
+      "title": "50-250mm 街猫与生灵抓拍——激活「动物眼部侦测 AF」与长焦低机位平视实战",
+      "summary": "广角拍猫容易惊吓逃跑或俯拍大头照。换上 50-250mm 处于 150-250mm 端站在 5~10 米安全距离外，翻折翻转屏 90 度贴地平视，激活静音拍摄与动物眼睛侦测，抓拍放松灵动瞬间。",
+      "steps": [
+        {
+          "strong": "第一步：5~10 米安全距离 + 贴地平视",
+          "text": "长焦赋予隐形观察者优势，猫咪完全不受打扰。翻转屏向上折 90 度，身体微蹲将相机降至离地 10~20 厘米，镜头与猫眼处于同一水平线，代入感成倍提升。"
+        },
+        {
+          "strong": "第二步：激活「对焦主体检测：动物（Animal Eye AF）」",
+          "text": "按 <code>i</code> 键 ➜ AF 区域模式选【广域（L-动物）】或【自动区域（动物）】。取景器出现猫脸时对焦点自动收缩为微型黄框紧咬眼部瞳孔，微动绝不脱靶。"
+        },
+        {
+          "strong": "第三步：开启「静音拍摄」",
+          "text": "<code>MENU</code> ➜ <code>静音拍摄</code> ➜ 设为 <code>ON</code>。猫咪对清脆快门声极敏感，开启电子快门完全零噪音，连拍几十张也毫无察觉。"
+        },
+        {
+          "strong": "第四步：锁死安全快门（1/500s 以上）",
+          "text": "舔爪或甩头动作迅疾，快门设为 1/500s~1/1000s，开启 VR 减震冻结动态毛边。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "150mm ~ 250mm（等效 225mm~375mm）",
+          "desc": "保证安全观察距离，营造强烈长焦背景虚化"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "S 档 或 A 档",
+          "desc": "确保快门不低于 1/500s 安全阈值"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/6.3（全开）",
+          "desc": "收集光线，把杂乱街景融化成柔润色块"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（最小快门锁 1/500s）",
+          "desc": "白天自动维持在 ISO 100~400 纯净低噪区间"
+        },
+        {
+          "key": "对焦模式",
+          "val": "AF-C + 广域（L-动物眼部追踪）",
+          "desc": "持续咬合动物眼睛"
+        },
+        {
+          "key": "释放模式",
+          "val": "高速连拍（H）",
+          "desc": "连拍捕捉舔爪或吐舌头的萌态瞬间"
+        }
+      ],
+      "pitfall": "捕捉“眼神光（Catchlight）”：猫咪眼睛是否灵动取决于眼球里有没有小白点。让猫咪稍微面朝天空或开阔光线处，清澈透明的琥珀色/翠绿色瞳孔里会倒映出晶莹高光，整只猫瞬间有了精气神。"
+    },
+    {
+      "id": 49,
+      "idStr": "49",
+      "chap": "street",
+      "category": "街头扫街",
+      "lens": "both",
+      "lensDesc": "16-50mm (50mm) / 50-250mm (50-70mm)",
+      "mountDesc": "手持抓拍",
+      "title": "索尔·雷特风诗意街拍——利用“大面积前景遮挡”与“孤立色彩碰撞”，把街景拍成油画",
+      "summary": "彩色街拍大师索尔·雷特的精髓在于“遮挡、留白与色彩孤立”。故意让水汽玻璃或深色伞檐遮挡画面 1/3 到 1/2，在狭窄缝隙中守候一柄红伞或黄色出租车穿过，把街景拍成油画。",
+      "steps": [
+        {
+          "strong": "第一步：大面积前景遮挡（窥视与留白）",
+          "text": "站在咖啡馆水汽玻璃窗后或深色路灯柱旁，故意让深色柱体或沾满雨雾的玻璃遮挡住画面的 1/3 甚至 1/2，产生电影镜头般的“窥视感”与空间厚度。"
+        },
+        {
+          "strong": "第二步：中焦焦段（等效 75-105mm）扁平化叠层",
+          "text": "16-50mm 拧至 50mm（或 50-250mm 放在 50-70mm），中焦物理压缩把近处遮挡物融化为柔和色块，将街道不同纵深的色层平整压在同一平面。"
+        },
+        {
+          "strong": "第三步：守候“画眼色彩（Pop of Color）”",
+          "text": "在灰冷沉静的街道中，静候一柄明艳红雨伞、一辆黄色出租车或一抹红色刹车灯从缝隙穿过，瞬间点亮全画。"
+        },
+        {
+          "strong": "第四步：诗意暖胶片调色",
+          "text": "白平衡 5500K 微调偏 A（琥珀+1.5）与 M（洋红+1.0）；优化校准选【自然】微调对比度-0.5、饱和度+1.0、清晰度-0.5，宛如油画颜料浸润。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "50mm（16-50mm 最长焦）/ 50-70mm（50-250mm）",
+          "desc": "等效 75-105mm 中焦，虚化贴脸遮挡物，压平街头色层"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/5.6 ~ f/6.3（全开）",
+          "desc": "让近处遮挡物边缘最大化散焦柔化"
+        },
+        {
+          "key": "快门速度",
+          "val": "保持在 1/125s ~ 1/250s 以上",
+          "desc": "确保穿过缝隙的行人步态或色彩主体清晰不糊"
+        },
+        {
+          "key": "感光度",
+          "val": "Auto ISO（上限设为 ISO 3200）",
+          "desc": "应对阴雨天光线衰减"
+        },
+        {
+          "key": "对焦模式",
+          "val": "单点 AF 对准缝隙中的色彩主体",
+          "desc": "避免对焦系统误判咬在近处的遮挡玻璃或柱子上"
+        }
+      ],
+      "pitfall": "焦点置前的大写意玩法：除了对焦在远处红伞行人身上，你还可以尝试将单点焦点反向对准近处玻璃上的水珠（让远处走过的红伞路人彻底化为一个朦胧漂浮的写意大红斑），极具印象派朦胧意境。"
+    },
+    {
+      "id": 12,
+      "idStr": "12",
+      "chap": "macro",
+      "category": "微距特写",
+      "lens": "tele",
+      "lensDesc": "50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持 / 三脚架",
+      "title": "50-250mm 长焦特写——利用 1 米近摄与 375mm 等效焦距，打造“奶油级”梦幻虚化",
+      "summary": "景深由焦距与物距共同决定。50-250mm 在 250mm 端拥有仅 1.0 米的最近对焦距离和 0.23x 放大倍率（等效全画幅 0.35x 特写），能将背景彻底融化为奶油般的弥散色块。",
+      "steps": [
+        {
+          "strong": "第一步：逼近 1.0 米物理极限",
+          "text": "变焦至 250mm 最长焦，人站在离主体约 1.0~1.2 米的极限距离，拉大主体与身后杂乱背景的距离，景深压缩至数毫米。"
+        },
+        {
+          "strong": "第二步：启用「精确自动对焦（Pinpoint AF）」",
+          "text": "按 <code>i</code> 键 ➜ AF 区域模式选【精确自动对焦】。对焦点面积只有常规单点的 1/4，精准点选花蕊、露珠或叶脉纹理。"
+        },
+        {
+          "strong": "第三步：开启「峰值对焦（d10）」辅助验焦",
+          "text": "<code>MENU</code> ➜ <code>自定义设定菜单</code> ➜ <code>d 拍摄/显示</code> ➜ <code>d10 轮廓增强显示</code> ➜ 设为【ON（峰值级别 2，颜色选红或黄）】。合焦边缘亮起彩色描边，清晰确认焦平面。"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "200mm ~ 250mm",
+          "desc": "获得最大放大倍率与最强烈的背景剥离感"
+        },
+        {
+          "key": "拍摄距离",
+          "val": "约 1.0m ~ 1.3m",
+          "desc": "处于镜头最近对焦极限边缘"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "A 档（光圈优先）",
+          "desc": "固定光圈"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/6.3（光圈全开）",
+          "desc": "收集最大进光量并营造最浅景深"
+        },
+        {
+          "key": "感光度",
+          "val": "手持: Auto ISO(最小快门 1/320s) | 上架: ISO 100",
+          "desc": "长焦近摄微小晃动即脱焦，手持务必保持高速快门与 VR 开启"
+        },
+        {
+          "key": "优化校准",
+          "val": "自然（Neutral）微调清晰度+1.0",
+          "desc": "主体焦内锐利剔透，焦外油润柔和"
+        }
+      ],
+      "pitfall": "警惕“进入对焦盲区”：若相机距离主体小于 1 米，超出光学结构对焦范围，相机会反复拉风箱无法合焦。遇到对不上焦只需身体后退半步（保持 1.1 米左右）即可重新轻松咬合焦点。"
+    },
+    {
+      "id": 15,
+      "idStr": "15",
+      "chap": "macro",
+      "category": "微距特写",
+      "lens": "wide",
+      "lensDesc": "16-50mm f/3.5-6.3 VR",
+      "mountDesc": "三脚架",
+      "title": "16-50mm 景区“动态消人术”——三脚架固定机位连拍与中间值堆栈实战",
+      "summary": "热门景区游客如织。利用三脚架固定机位连拍 15~25 张，在 Photoshop 中利用“中间值（Median）”堆栈算法，自动剔除移动走过的人潮，还原空无一人的纯净建筑大片。",
+      "steps": [
+        {
+          "strong": "第一步：三脚架锁死全手动参数",
+          "text": "切 <code>M 档</code>，光圈 f/8，ISO 100，快门固定；白平衡设为【晴天 5500K】；对焦模式切 <code>MF</code> 锁死。保证每张照片曝光、色彩与焦平面严格一致。"
+        },
+        {
+          "strong": "第二步：利用「间隔定时拍摄」自动连拍 20 张",
+          "text": "<code>MENU</code> ➜ <code>间隔定时拍摄</code> ➜ 间隔时间设为 <code>3秒</code>（让行人有足够时间移开位移）；拍摄张数设为 <code>20 × 1</code>；相机 1 分钟内自动拍完，机位零位移。"
+        },
+        {
+          "strong": "第三步：PS 30 秒一键消人",
+          "text": "打开 PS ➜ <code>文件</code> ➜ <code>脚本</code> ➜ <code>将文件载入堆栈</code> ➜ 全选 20 张照片并勾选【载入图层后创建智能对象】➜ 选中智能对象图层 ➜ <code>图层</code> ➜ <code>智能对象</code> ➜ <code>堆栈模式</code> ➜ 选择 <code>中间值（Median）</code>！所有走动路人凭空消失！"
+        }
+      ],
+      "params": [
+        {
+          "key": "镜头焦段",
+          "val": "16mm ~ 28mm",
+          "desc": "广角纳入完整建筑体与前方广场"
+        },
+        {
+          "key": "拍摄模式",
+          "val": "M 档（全手动）",
+          "desc": "锁死每张照片进光量与明暗"
+        },
+        {
+          "key": "光圈选择",
+          "val": "f/8",
+          "desc": "最佳锐度光圈，保证建筑边缘极致锐利"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100",
+          "desc": "原生最低噪点基准"
+        },
+        {
+          "key": "拍摄张数",
+          "val": "15 ~ 25 张（间隔 2~3 秒）",
+          "desc": "确保地面每个像素点有 50% 以上时间不被行人遮挡"
+        },
+        {
+          "key": "防抖开关",
+          "val": "上架关闭 VR",
+          "desc": "消除防抖陀螺仪自激震动"
+        }
+      ],
+      "pitfall": "唯一避坑点（静止不动的人）：若画面中有长时间坐着不动的游客或站立摆拍数分钟的人，由于其在半数以上照片中位置固定，算法会误认为是背景而无法消除。拍摄前观察，避开有长期驻留者的角度。"
+    },
+    {
+      "id": 53,
+      "idStr": "53",
+      "chap": "macro",
+      "category": "微距特写",
+      "lens": "tele",
+      "lensDesc": "50-250mm 长焦特写",
+      "mountDesc": "手持 / 独脚架",
+      "title": "50-250mm 雨后花卉水滴倒影——利用 250mm 浅景深与反光板提亮暗部",
+      "summary": "雨后植物表面的水滴是天然透镜。利用 250mm 端 1 米最近对焦距离，结合微距对焦技巧与手持反光板，在水滴中拍出周围景物的清晰倒影与如梦似幻的背景光斑。",
+      "steps": [
+        {
+          "strong": "锁定焦点于水滴高光边缘",
+          "text": "使用单点 AF 或手动对焦配合 Fn2 100% 局部放大，确保焦点死死锁在水滴折射的最亮点上。"
+        },
+        {
+          "strong": "寻找顺光或侧逆光角度",
+          "text": "侧逆光能让水滴边缘勾勒出金色高光轮廓，背景处于背光阴影中，形成强烈的反差。"
+        },
+        {
+          "strong": "利用便携反光板补光",
+          "text": "用一张白色卡纸或便携反光板在暗部轻轻补光，提亮水滴内部折射的花瓣细节。"
+        }
+      ],
+      "params": [
+        {
+          "key": "推荐焦段",
+          "val": "250mm 端（等效 375mm）",
+          "desc": "最大化放大倍率与空间虚化"
+        },
+        {
+          "key": "光圈设定",
+          "val": "f/6.3 - f/8",
+          "desc": "适度收缩半档至一档，保证水滴球体本身有足够清晰度"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/250s 以上",
+          "desc": "微距下微小微风都会导致脱焦，需确保足够安全快门"
+        },
+        {
+          "key": "感光度",
+          "val": "ISO 100 - 400",
+          "desc": "保证最纯净的画质与微距细节"
+        }
+      ],
+      "pitfall": "微距摄影景深极其浅薄（常不足数毫米），轻微身体晃动即会脱焦。建议开启连拍（CL），在轻微前后呼吸微调中捕获焦点最清晰的那一张。"
+    },
+    {
+      "id": 54,
+      "idStr": "54",
+      "chap": "telephoto",
+      "category": "长焦空间压缩卷",
+      "lens": "tele",
+      "lensDesc": "NIKKOR Z DX 50-250mm f/4.5-6.3 VR",
+      "mountDesc": "手持拍摄/利用栏杆支撑",
+      "title": "50-250mm 城市建筑几何——利用长焦空间压缩与“极简线条”重构都市美学",
+      "summary": "利用 250mm 端强悍的空间压缩效应，将散乱的城市建筑剥离背景，通过线条的重复与切割，将复杂的现实简化为抽象的几何画作。",
+      "steps": [
+        {
+          "strong": "寻找建筑切片",
+          "text": "利用翻转屏进行超低位或高位取景，避开杂乱地面，只选取建筑的局部线条、窗框或重复的楼体结构，利用长焦的裁切感构建画面。"
+        },
+        {
+          "strong": "对齐基准线",
+          "text": "开启机内“显示网格”，将建筑线条与屏幕网格线完美平行，确保透视不歪斜，这是几何风格的核心。"
+        },
+        {
+          "strong": "精细对焦与曝光",
+          "text": "使用单点 AF 对焦在建筑边缘锐利处，观察直方图，适当欠曝 0.3-0.7EV 以增强深色线条的厚重感。"
+        }
+      ],
+      "params": [
+        {
+          "key": "焦段推荐",
+          "val": "150mm - 250mm",
+          "desc": "极窄视角能最大程度压缩空间，消除透视畸变，让物体看起来像“贴”在一起。"
+        },
+        {
+          "key": "曝光模式与光圈",
+          "val": "A档 / f/8 - f/11",
+          "desc": "套头在 f/8-f/11 拥有最佳锐度，确保几何线条边缘清晰无色散。"
+        },
+        {
+          "key": "快门速度",
+          "val": "1/250s 或更高",
+          "desc": "长焦端手持极易产生微震，确保快门速度高于焦距倒数，维持画质纯净。"
+        },
+        {
+          "key": "ISO 与对焦",
+          "val": "ISO 100 / 单点AF",
+          "desc": "保持最低感光度以获得最佳解析力，单点对焦确保几何平面的焦点位置精准。"
+        },
+        {
+          "key": "色彩与VR",
+          "val": "单色模式 / VR 开启",
+          "desc": "使用“单色”优化校准，剔除杂色干扰，直观判断线条与光影的构成效果。"
+        }
+      ],
+      "pitfall": "最大的翻车点在于‘线条不平’。Z30 没有取景器，容易在仰拍时忽略机身水平，导致建筑线条倾斜产生透视畸变。大师秘诀：务必利用翻转屏的辅助线，且长焦端拍摄时尽量保持身体稳定，利用路边的栏杆充当临时三脚架，否则微小的抖动会直接导致建筑边缘糊化，丧失几何美学的锐利感。"
+    }
+  ]
+};
+  </script>
+
+  <!-- Interactive Logic Script -->
+  <script>
+    // State
+    let currentTipId = 1;
+    let currentLensFilter = 'all';
+    let searchQuery = '';
+    let bookmarkSet = new Set(JSON.parse(localStorage.getItem('nikon_bookmarks') || '[]'));
+    let lastReadId = parseInt(localStorage.getItem('nikon_last_read') || '1', 10);
+    let isMobileTocOpen = false;
+
+    const tipsMap = new Map();
+    DATA.tips.forEach(t => tipsMap.set(t.id, t));
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderVolumes();
+      renderQuickIndex();
+      updateBookmarkUI();
+      checkLastRead();
+      setupTouchSwipe();
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+        if (e.key === 'ArrowLeft') {
+          if (document.getElementById('readerView').style.display === 'block') {
+            goPrevTip();
+          }
+        } else if (e.key === 'ArrowRight') {
+          if (document.getElementById('readerView').style.display === 'block') {
+            goNextTip();
+          }
+        } else if (e.key === 'Escape') {
+          showBookshelfView();
+        } else if (e.key === '/' || (e.ctrlKey && e.key.toLowerCase() === 'k')) {
+          e.preventDefault();
+          document.getElementById('globalSearch').focus();
+        }
+      });
+
+      // Search Listener
+      const searchInput = document.getElementById('globalSearch');
+      const clearBtn = document.getElementById('clearSearchBtn');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        clearBtn.style.display = searchQuery ? 'block' : 'none';
+        renderQuickIndex();
+      });
+    });
+
+    // Touch Swipe Detection for mobile reading
+    function setupTouchSwipe() {
+      const panel = document.getElementById('readerSheetPanel');
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      panel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      panel.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        // Ensure horizontal swipe is dominant and distance > 55px
+        if (Math.abs(diffX) > 55 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+          if (diffX < 0) {
+            // Swiped left -> Next
+            goNextTip();
+          } else {
+            // Swiped right -> Prev
+            goPrevTip();
+          }
+        }
+      }, { passive: true });
+    }
+
+    function checkLastRead() {
+      const tip = tipsMap.get(lastReadId);
+      if (tip) {
+        document.getElementById('lastReadContainer').style.display = 'block';
+        document.getElementById('lastReadTitle').textContent = '#' + tip.idStr + ' ' + tip.title;
+      }
+    }
+
+    function resumeLastRead() {
+      openReader(lastReadId);
+    }
+
+    /* ─── Render 8 Book Volumes ─── */
+    function renderVolumes() {
+      const container = document.getElementById('volumeCardsGrid');
+      container.innerHTML = '';
+
+      const chapKeys = Object.keys(DATA.chapters);
+      chapKeys.forEach(ckey => {
+        const chap = DATA.chapters[ckey];
+        const chapTips = DATA.tips.filter(t => t.chap === ckey);
+
+        const card = document.createElement('div');
+        card.className = 'book-volume-card';
+        card.style.setProperty('--vol-accent', chap.color);
+        card.onclick = () => {
+          if (chapTips.length > 0) {
+            openReader(chapTips[0].id);
+          }
+        };
+
+        card.innerHTML = `
+          <div>
+            <div class="bvc-header">
+              <span class="bvc-vol-tag">${chap.vol}</span>
+              <span class="bvc-badge">${chapTips.length} 讲实战</span>
+            </div>
+            <div class="bvc-body">
+              <h3 class="bvc-title">${chap.icon} ${chap.name}</h3>
+              <p class="bvc-desc">${chap.desc}</p>
+            </div>
+          </div>
+          <div class="bvc-footer">
+            <span class="bvc-progress">精装手记 · ${chap.id.toUpperCase()}</span>
+            <span class="bvc-open-btn">翻开此卷 ➜</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* ─── Render Quick Index Grid ─── */
+    function renderQuickIndex() {
+      const container = document.getElementById('quickIndexGrid');
+      container.innerHTML = '';
+
+      let filtered = DATA.tips.filter(tip => {
+        const matchesLens = (currentLensFilter === 'all' || tip.lens === currentLensFilter || tip.lens === 'both');
+        const matchesSearch = !searchQuery || (
+          tip.title.toLowerCase().includes(searchQuery) ||
+          tip.summary.toLowerCase().includes(searchQuery) ||
+          tip.params.some(p => p.val.toLowerCase().includes(searchQuery) || p.key.toLowerCase().includes(searchQuery))
+        );
+        return matchesLens && matchesSearch;
+      });
+
+      document.getElementById('visibleCardsCount').textContent = `显示 ${filtered.length} / ${DATA.tips.length} 讲`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 48px; color: var(--text-dim);">
+          未找到与 "${searchQuery}" 相关的技巧，请更换关键词搜索。
+        </div>`;
+        return;
+      }
+
+      filtered.forEach(tip => {
+        const item = document.createElement('div');
+        item.className = 'tip-index-card';
+        item.onclick = () => openReader(tip.id);
+
+        item.innerHTML = `
+          <div>
+            <div class="tic-top">
+              <span class="tic-num">#${tip.idStr}</span>
+              <div class="tic-tags">
+                <span class="tag-bubble">${tip.category}</span>
+                <span class="tag-bubble">${tip.lensDesc}</span>
+              </div>
+            </div>
+            <h4 class="tic-title">${tip.title}</h4>
+            <p class="tic-summary">${tip.summary}</p>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    /* ─── Reader View Logic ─── */
+    function openReader(tipId) {
+      const tip = tipsMap.get(tipId);
+      if (!tip) return;
+
+      currentTipId = tipId;
+      lastReadId = tipId;
+      localStorage.setItem('nikon_last_read', tipId);
+
+      document.getElementById('bookshelfView').style.display = 'none';
+      document.getElementById('readerView').style.display = 'block';
+
+      // Update button text
+      const btnSpan = document.getElementById('btnToggleViewText');
+      btnSpan.innerHTML = '<span class="btn-text-full">返回典藏书架</span><span class="btn-text-mobile">书架</span>';
+
+      // Update dropdown
+      updateVolDropdown(tip.chap);
+
+      // Render TOC for this volume
+      renderTocForChapter(tip.chap);
+
+      // Render Reader Sheet
+      renderSheetContent(tip);
+
+      // Collapse mobile TOC by default
+      closeMobileToc();
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showBookshelfView() {
+      document.getElementById('bookshelfView').style.display = 'block';
+      document.getElementById('readerView').style.display = 'none';
+
+      const btnSpan = document.getElementById('btnToggleViewText');
+      btnSpan.innerHTML = '<span class="btn-text-full">进入书房阅读器</span><span class="btn-text-mobile">阅读器</span>';
+
+      checkLastRead();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleShelfOrReader() {
+      const isReader = document.getElementById('readerView').style.display === 'block';
+      if (isReader) {
+        showBookshelfView();
+      } else {
+        openReader(lastReadId || 1);
+      }
+    }
+
+    function toggleMobileToc() {
+      const list = document.getElementById('tocItemsList');
+      const arrow = document.getElementById('mobileTocArrow');
+      isMobileTocOpen = !isMobileTocOpen;
+      if (isMobileTocOpen) {
+        list.classList.add('mobile-expanded');
+        arrow.textContent = '▲';
+      } else {
+        list.classList.remove('mobile-expanded');
+        arrow.textContent = '▼';
+      }
+    }
+
+    function closeMobileToc() {
+      const list = document.getElementById('tocItemsList');
+      const arrow = document.getElementById('mobileTocArrow');
+      isMobileTocOpen = false;
+      list.classList.remove('mobile-expanded');
+      arrow.textContent = '▼';
+    }
+
+    function updateVolDropdown(activeChapId) {
+      const sel = document.getElementById('tocVolSelector');
+      sel.innerHTML = '';
+      Object.keys(DATA.chapters).forEach(ckey => {
+        const chap = DATA.chapters[ckey];
+        const opt = document.createElement('option');
+        opt.value = ckey;
+        opt.textContent = `${chap.vol} · ${chap.name}`;
+        if (ckey === activeChapId) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    }
+
+    function onSelectVolFromDropdown(chapId) {
+      const chapTips = DATA.tips.filter(t => t.chap === chapId);
+      if (chapTips.length > 0) {
+        openReader(chapTips[0].id);
+      }
+    }
+
+    function renderTocForChapter(chapId) {
+      const container = document.getElementById('tocItemsList');
+      container.innerHTML = '';
+
+      const chapTips = DATA.tips.filter(t => t.chap === chapId);
+      document.getElementById('tocVolProgress').textContent = `本卷共 ${chapTips.length} 讲`;
+      document.getElementById('mobileTocCount').textContent = `${chapTips.length} 讲`;
+
+      chapTips.forEach(tip => {
+        const li = document.createElement('li');
+        li.className = 'toc-item' + (tip.id === currentTipId ? ' active' : '');
+        li.onclick = () => {
+          openReader(tip.id);
+          closeMobileToc();
+        };
+
+        li.innerHTML = `
+          <span class="toc-num">#${tip.idStr}</span>
+          <span class="toc-text">${tip.title}</span>
+          <span class="toc-lens-dot ${tip.lens}"></span>
+        `;
+        container.appendChild(li);
+      });
+    }
+
+    function renderSheetContent(tip) {
+      document.getElementById('sheetId').textContent = '#' + tip.idStr;
+      document.getElementById('sheetCategory').textContent = tip.category;
+      document.getElementById('sheetLens').textContent = tip.lensDesc || '通用';
+      document.getElementById('sheetMount').textContent = tip.mountDesc || '手持/脚架';
+      document.getElementById('sheetTitle').textContent = tip.title;
+      document.getElementById('sheetSummary').textContent = tip.summary;
+
+      // Bookmark button state
+      const isBookmarked = bookmarkSet.has(tip.id);
+      document.getElementById('bookmarkStarIcon').textContent = isBookmarked ? '★' : '☆';
+      document.getElementById('bookmarkText').textContent = isBookmarked ? '已收藏' : '加入书签';
+      document.getElementById('btnToggleBookmark').classList.toggle('active', isBookmarked);
+
+      // Steps
+      const stepsContainer = document.getElementById('sheetSteps');
+      stepsContainer.innerHTML = '';
+      tip.steps.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'step-card';
+        div.innerHTML = `<strong>${s.strong}</strong>：${s.text}`;
+        stepsContainer.appendChild(div);
+      });
+
+      // Params Table
+      const tableBody = document.getElementById('sheetParamsTable');
+      tableBody.innerHTML = '';
+      tip.params.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="param-key">${p.key}</td>
+          <td class="param-val">${p.val}</td>
+          <td>${p.desc}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      // Pitfall
+      document.getElementById('sheetPitfallText').textContent = tip.pitfall || '注意安全操作。';
+
+      // Pager
+      document.getElementById('pagerProgressText').textContent = `第 ${tip.id} / ${DATA.tips.length} 讲`;
+      const pct = Math.round((tip.id / DATA.tips.length) * 100);
+      document.getElementById('progressBarFill').style.width = pct + '%';
+
+      document.getElementById('btnPrevTip').disabled = (tip.id <= 1);
+      document.getElementById('btnNextTip').disabled = (tip.id >= DATA.tips.length);
+    }
+
+    function goPrevTip() {
+      if (currentTipId > 1) {
+        openReader(currentTipId - 1);
+      }
+    }
+
+    function goNextTip() {
+      if (currentTipId < DATA.tips.length) {
+        openReader(currentTipId + 1);
+      }
+    }
+
+    /* ─── Bookmarks & Utilities ─── */
+    function toggleCurrentBookmark() {
+      if (bookmarkSet.has(currentTipId)) {
+        bookmarkSet.delete(currentTipId);
+        showToast('已取消该书签');
+      } else {
+        bookmarkSet.add(currentTipId);
+        showToast('已加入我的精选书签 ⭐');
+      }
+      localStorage.setItem('nikon_bookmarks', JSON.stringify([...bookmarkSet]));
+      updateBookmarkUI();
+      renderSheetContent(tipsMap.get(currentTipId));
+    }
+
+    function updateBookmarkUI() {
+      document.getElementById('bookmarkCount').textContent = bookmarkSet.size;
+      document.getElementById('bookmarkCountMobile').textContent = bookmarkSet.size;
+    }
+
+    function filterByBookmarks() {
+      if (bookmarkSet.size === 0) {
+        showToast('暂无书签，可在阅读时点击右上角【加入书签】');
+        return;
+      }
+      showBookshelfView();
+      searchQuery = '';
+      document.getElementById('globalSearch').value = '';
+
+      const container = document.getElementById('quickIndexGrid');
+      container.innerHTML = '';
+      document.getElementById('cardsIndexTitle').textContent = '⭐ 我的精选书签典藏列表';
+
+      const starred = DATA.tips.filter(t => bookmarkSet.has(t.id));
+      document.getElementById('visibleCardsCount').textContent = `共 ${starred.length} 条书签`;
+
+      starred.forEach(tip => {
+        const item = document.createElement('div');
+        item.className = 'tip-index-card';
+        item.onclick = () => openReader(tip.id);
+        item.innerHTML = `
+          <div>
+            <div class="tic-top">
+              <span class="tic-num">#${tip.idStr}</span>
+              <div class="tic-tags">
+                <span class="tag-bubble">${tip.category}</span>
+                <span class="tag-bubble">${tip.lensDesc}</span>
+              </div>
+            </div>
+            <h4 class="tic-title">${tip.title}</h4>
+            <p class="tic-summary">${tip.summary}</p>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+      document.getElementById('quickIndexGrid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyCurrentParams() {
+      const tip = tipsMap.get(currentTipId);
+      if (!tip) return;
+
+      let text = `【尼康 Z30 实战秘籍 #${tip.idStr}】${tip.title}\n`;
+      text += `推荐焦段与机位：${tip.lensDesc} (${tip.mountDesc})\n\n`;
+      text += `【核心拍摄参数配方】\n`;
+      tip.params.forEach(p => {
+        text += `- ${p.key}：${p.val} (${p.desc})\n`;
+      });
+      text += `\n【大师避坑】${tip.pitfall}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('已复制完整参数到剪贴板！可直接粘贴至备忘录或微信');
+      }).catch(() => {
+        showToast('参数已准备好');
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('globalToast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function clearSearch() {
+      document.getElementById('globalSearch').value = '';
+      searchQuery = '';
+      document.getElementById('clearSearchBtn').style.display = 'none';
+      renderQuickIndex();
+    }
+
+    function setLensFilter(type, btn) {
+      currentLensFilter = type;
+      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderQuickIndex();
+    }
+  </script>
+</body>
+</html>

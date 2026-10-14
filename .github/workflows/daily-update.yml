@@ -1,0 +1,69 @@
+name: 每日摄影技巧云端自动更新
+
+on:
+  schedule:
+    # 每天北京时间 09:00 准时触发 (UTC 01:00)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 支持在 GitHub 后台随时手动一键测试
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 调用 Gemini API 原创生成今日新技巧并重构图书库
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node daily_auto_generate.mjs
+
+      - name: 提交并推送最新数据回 GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add tips_data.json index.html
+          git commit -m "Auto: 每日自动新增尼康Z30摄影技巧与图书库重构 [skip ci]" || exit 0
+          git push
+
+      - name: 刷新 Cloudflare 认证凭证（确保永不过期）
+        env:
+          REFRESH_TOKEN: ${{ secrets.CLOUDFLARE_REFRESH_TOKEN }}
+        run: |
+          if [ -n "$REFRESH_TOKEN" ]; then
+            node -e "
+              fetch('https://dash.cloudflare.com/oauth2/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                  grant_type: 'refresh_token',
+                  client_id: '54d11594-84e4-41aa-b438-e81b8fa78ee7',
+                  refresh_token: process.env.REFRESH_TOKEN
+                })
+              }).then(r => r.json()).then(data => {
+                if (data.access_token) {
+                  console.log('[OK] Cloudflare token refreshed for this run');
+                  const fs = require('fs');
+                  fs.appendFileSync(process.env.GITHUB_ENV, 'DYNAMIC_CF_TOKEN=' + data.access_token + '\n');
+                }
+              }).catch(e => console.warn('Refresh notice:', e.message));
+            "
+          fi
+
+      - name: 自动部署上线至 Cloudflare Pages
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ env.DYNAMIC_CF_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          npx wrangler pages deploy . --project-name=nikon-z30-guide --branch=main --commit-dirty=true
