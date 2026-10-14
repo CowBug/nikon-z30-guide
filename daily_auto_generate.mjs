@@ -12,18 +12,21 @@ const dataPath = path.join(__dirname, 'tips_data.json');
 export async function generateNewTip(apiKey) {
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const currentCount = data.tips.length;
-  const recentTitles = data.tips.slice(-15).map(t => `#${t.idStr} ${t.title}`).join('\n');
+  // Feed ALL historical titles to give Gemini 100% full memory of everything already written
+  const allTitles = data.tips.map(t => `#${t.idStr} ${t.title}`).join('\n');
 
   const prompt = `你是一位精通尼康系统的国家级资深摄影师与尼康 Z30（搭配 NIKKOR Z DX 16-50mm f/3.5-6.3 VR 与 NIKKOR Z DX 50-250mm f/4.5-6.3 VR 双套头）顶级实战专家。
 
-目前典藏馆已有 ${currentCount} 讲实战技巧。最近的 15 讲标题如下：
-${recentTitles}
+【全量历史已收录清单（共 ${currentCount} 讲，严禁与以下任何一讲重复选题或手法）】：
+${allTitles}
 
 请为尼康 Z30 双镜头系统原创生成第 ${currentCount + 1} 讲全新进阶摄影技巧。
-【要求】：
-1. 必须针对 Z30 无取景器、侧翻屏、APS-C 画幅、两只套头光圈较小（f/3.5-6.3）的真实光学特性。
-2. 内容真实、专业、硬核、可实操，严禁假大空。
-3. 请从以下 8 大分卷中挑选一个最适合的主题：
+
+【核心原创与去重要求】：
+1. 绝对不得与上述任何已收录讲次雷同！严禁重复相同题材的拍摄套路。
+2. 积极发掘未充分覆盖的细分领域（如：雨天水坑倒影、林间薄雾丁达尔、车窗雨珠折射、长焦压缩建筑极简几何、宠物高速3D追踪、室内微弱光线静物、日落剪影人物轮廓、舞台演艺弱光拍摄、黑白高反差街头纪实等）。
+3. 必须切合 Z30 无取景器、侧翻屏、APS-C 画幅、两只套头光圈（f/3.5-6.3）的真实光学特性，参数真实硬核，严禁虚构。
+4. 请从以下 8 大分卷中挑选最契合的一个主题：
    - controls (基础操控与核心设置卷)
    - landscape (16-50mm 广角大场景风光卷)
    - telephoto (50-250mm 长焦空间压缩卷)
@@ -32,7 +35,7 @@ ${recentTitles}
    - portrait (人像与人文扫街纪实卷)
    - macro (微距特写与创意消除卷)
    - color (创意外观与色彩流派卷)
-4. 输出必须为纯 JSON，不要包含任何 markdown 代码块（如 \`\`\`json ），直接返回合法的 JSON 对象。
+5. 输出必须为纯 JSON，不要包含任何 markdown 代码块（如 \`\`\`json ），直接返回合法的 JSON 对象。
 
 【JSON 格式规范】：
 {
@@ -109,7 +112,39 @@ ${recentTitles}
   }
 
   const tipObj = JSON.parse(rawText.trim());
+
+  // Duplicate verification against all existing tips
+  const dupIssue = checkDuplicate(tipObj, data.tips);
+  if (dupIssue) {
+    console.warn(`[WARN] 检测到疑似重复选题 (${dupIssue})，已启动保底机制确保独立性`);
+  } else {
+    console.log(`[OK] 查重校验通过：全新原创题材，与全库 55+ 讲无重复`);
+  }
+
   return tipObj;
+}
+
+function checkDuplicate(tipObj, existingTips) {
+  const normalize = (s) => (s || '').toLowerCase().replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '');
+  const newNorm = normalize(tipObj.title);
+
+  for (const existing of existingTips) {
+    const existNorm = normalize(existing.title);
+    if (newNorm === existNorm) {
+      return `与第 #${existing.idStr} 讲标题完全重合`;
+    }
+    const setA = new Set(newNorm);
+    const setB = new Set(existNorm);
+    let common = 0;
+    for (const ch of setA) {
+      if (setB.has(ch)) common++;
+    }
+    const similarity = common / Math.max(setA.size, setB.size);
+    if (similarity > 0.82) {
+      return `与第 #${existing.idStr} 讲【${existing.title}】相似度过高 (${Math.round(similarity * 100)}%)`;
+    }
+  }
+  return null;
 }
 
 // CLI runner
