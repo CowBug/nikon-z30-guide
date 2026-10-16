@@ -63,47 +63,58 @@ ${allTitles}
 
   const candidateModels = [
     'gemini-3.5-flash',
-    'gemini-3.8-flash',
+    'gemini-3.5-flash-lite',
     'gemini-3.1-flash-lite',
-    'gemini-flash-latest'
+    'gemini-3-flash-preview',
+    'gemini-3.8-flash'
   ];
 
   let rawText = null;
   let lastError = null;
 
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  modelLoop:
   for (const model of candidateModels) {
-    try {
-      console.log(`[INFO] Attempting generation with ${model} for Tip #${currentCount + 1}...`);
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        console.log(`[INFO] Attempting generation with ${model} (attempt ${attempt}) for Tip #${currentCount + 1}...`);
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            responseMimeType: "application/json",
-            temperature: 0.7
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              responseMimeType: "application/json",
+              temperature: 0.7
+            }
+          })
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          console.warn(`[WARN] Model ${model} returned status ${response.status}. Attempt ${attempt}/2.`);
+          lastError = new Error(`Gemini API Error (${response.status}): ${errText}`);
+          if (response.status === 503 || response.status === 429) {
+            await sleep(2500 * attempt);
+            continue;
           }
-        })
-      });
+          break; // other errors skip to next model
+        }
 
-      if (!response.ok) {
-        const errText = await response.text();
-        console.warn(`[WARN] Model ${model} returned status ${response.status}. Trying next...`);
-        lastError = new Error(`Gemini API Error (${response.status}): ${errText}`);
-        continue;
+        const result = await response.json();
+        rawText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (rawText) {
+          console.log(`[SUCCESS] Generated successfully using ${model}!`);
+          break modelLoop;
+        }
+      } catch (e) {
+        console.warn(`[WARN] Model ${model} attempt ${attempt} failed with: ${e.message}`);
+        lastError = e;
+        await sleep(2000);
       }
-
-      const result = await response.json();
-      rawText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (rawText) {
-        console.log(`[SUCCESS] Generated successfully using ${model}!`);
-        break;
-      }
-    } catch (e) {
-      console.warn(`[WARN] Model ${model} failed with: ${e.message}`);
-      lastError = e;
     }
   }
 
